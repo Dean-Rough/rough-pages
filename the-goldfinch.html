@@ -5,198 +5,301 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Goldfinch — Rough</title>
 <style>
+  /* ============================================================
+     ROUGH DESIGN SYSTEM — tokens from rough-ink global.css
+     ============================================================ */
+
+  /* ---- Self-hosted fonts (via rough-ink.vercel.app) ---- */
   @font-face {
-    font-family: 'FoundersGroteskXCond';
-    src: url('fonts/FoundersGroteskXCond-Bold.otf') format('opentype');
+    font-family: "FoundersGroteskXCond";
+    src: url("https://rough-ink.vercel.app/fonts/FoundersGroteskXCond-Bold.otf") format("opentype");
     font-weight: 700; font-style: normal; font-display: swap;
   }
   @font-face {
-    font-family: 'Sohne';
-    src: url('fonts/Sohne-Kraftig.ttf') format('truetype');
+    font-family: "Sohne";
+    src: url("https://rough-ink.vercel.app/fonts/Sohne-Kraftig.ttf") format("truetype");
     font-weight: 500; font-style: normal; font-display: swap;
   }
   @font-face {
-    font-family: 'SohneBreit';
-    src: url('fonts/SohneBreit-Kraftig.ttf') format('truetype');
+    font-family: "SohneBreit";
+    src: url("https://rough-ink.vercel.app/fonts/SohneBreit-Kraftig.ttf") format("truetype");
     font-weight: 500; font-style: normal; font-display: swap;
   }
 
   :root {
-    --near-black: #272727;
-    --off-white: #EDEFE9;
-    --chocolate: #6D422E;
-    --tangerine: #FC8143;
-    --acid-lime: #ECFEA7;
-    --lilac: #BFACF8;
-    --pink: #F8C8D8;
-    --font-display: 'FoundersGroteskXCond', 'Impact', sans-serif;
-    --font-body: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
-    --font-tag: 'SohneBreit', 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+    /* Colour — primary */
+    --color-near-black: #272727;
+    --color-off-white: #edefe9;
+    /* Colour — secondary */
+    --color-chocolate: #6d422e;
+    --color-tangerine: #fc8143;
+    --color-acid-lime: #ecfea7;
+    --color-lilac: #bfacf8;
+    --color-pink: #f8c8d8;
+    /* Semantic */
+    --color-fg1: var(--color-near-black);
+    --color-fg2: #5a5a5a;
+    --color-fg-inverse: var(--color-off-white);
+    --color-bg1: var(--color-off-white);
+    --color-bg-inverse: var(--color-near-black);
+    --color-cta: var(--color-tangerine);
+    --color-highlight: var(--color-acid-lime);
+    /* Type families */
+    --font-display: "FoundersGroteskXCond", "Impact", "Helvetica Neue Condensed", sans-serif;
+    --font-body: "Sohne", "Söhne", "Helvetica Neue", Arial, sans-serif;
+    --font-tag: "SohneBreit", "Sohne", "Helvetica Neue", Arial, sans-serif;
+    /* Type scale */
+    --text-display: clamp(3rem, 12vw + 1rem, 8.75rem);
+    --text-h2: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
+    --text-h3: clamp(1.125rem, 2vw, 1.5rem);
+    --text-body: clamp(0.875rem, 1vw + 0.25rem, 1rem);
+    --text-caption: clamp(0.625rem, 0.8vw, 0.75rem);
+    /* Spacing — 8px grid */
+    --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+    --space-4: 1rem; --space-5: 1.5rem; --space-6: 2rem;
+    --space-7: 3rem; --space-8: 4rem; --space-9: 6rem;
+    /* Layout */
+    --container-content: 1200px;
+    --page-margin: clamp(1rem, 4vw, 3rem);
+    --section-gap: 6rem;
+    --border-rule: 1px solid var(--color-near-black);
+    /* Motion */
+    --ease-rough: cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html { background: var(--color-off-white); color: var(--color-near-black); }
+
   body {
     font-family: var(--font-body);
     font-weight: 500;
-    color: var(--near-black);
-    background: var(--off-white);
+    font-size: var(--text-body);
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: var(--color-near-black);
+    background: var(--color-off-white);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     display: flex; justify-content: center; align-items: center;
-    min-height: 100vh; padding: 2rem;
+    min-height: 100vh; padding: var(--space-6);
   }
 
+  ::selection { background: var(--color-acid-lime); color: var(--color-near-black); }
+
+  /* ---- Flyer card ---- */
   .flyer {
-    width: 420px;
-    background: var(--off-white);
-    border: 1px solid var(--near-black);
-    padding: 2rem;
-    display: flex; flex-direction: column; gap: 1.5rem;
+    width: 100%;
+    max-width: 480px;
+    background: var(--color-off-white);
+    border: var(--border-rule);
+    display: flex; flex-direction: column;
   }
 
+  /* ---- Book cover — full-bleed image ---- */
+  .cover {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    border-bottom: var(--border-rule);
+  }
+
+  /* ---- Body section ---- */
+  .body-section {
+    padding: var(--space-6);
+    display: flex; flex-direction: column; gap: var(--space-5);
+  }
+
+  /* ---- Eyebrow ---- */
   .eyebrow {
     font-family: var(--font-tag);
-    font-size: 10px;
+    font-weight: 500;
+    font-size: var(--text-caption);
     text-transform: uppercase;
     letter-spacing: 0;
-    color: var(--near-black);
-    border-bottom: 1px solid var(--near-black);
-    padding-bottom: 0.5rem;
-  }
-
-  .hero {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 3.5rem;
-    line-height: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    background: var(--acid-lime);
-    padding: 1.25rem;
-    margin: -0.25rem;
-  }
-
-  .tagline {
-    font-family: var(--font-body);
-    font-size: 1.125rem;
-    line-height: 1.3;
-    color: var(--near-black);
-    max-width: 32ch;
-  }
-
-  .synopsis {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: var(--near-black);
-    border-left: 3px solid var(--chocolate);
-    padding-left: 1rem;
-    max-width: 40ch;
-  }
-
-  .specs {
-    display: flex; gap: 1.5rem;
-    font-family: var(--font-tag);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0;
-  }
-
-  .specs span { display: block; }
-  .specs .label { color: #5A5A5A; margin-bottom: 0.15rem; }
-  .specs .value { color: var(--near-black); }
-
-  .cta {
-    display: inline-block;
-    font-family: var(--font-tag);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    color: var(--near-black);
-    background: var(--tangerine);
-    border: 1px solid var(--near-black);
-    padding: 0.6rem 1.5rem;
-    text-decoration: none;
-    align-self: flex-start;
-    transition: background 200ms cubic-bezier(0.25, 0.1, 0.25, 1), color 200ms cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
-
-  .cta:hover {
-    background: var(--near-black);
-    color: var(--off-white);
-  }
-
-  .footer-strip {
-    border-top: 1px solid var(--near-black);
-    padding-top: 0.75rem;
-    font-family: var(--font-tag);
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    color: #5A5A5A;
+    line-height: 1.05;
+    color: var(--color-near-black);
+    border-bottom: var(--border-rule);
+    padding-bottom: var(--space-3);
     display: flex; justify-content: space-between;
   }
 
+  /* ---- Hero title ---- */
+  .hero {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 3.25rem;
+    line-height: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: var(--color-near-black);
+    background: var(--color-acid-lime);
+    padding: var(--space-5);
+  }
+
+  /* ---- Tagline ---- */
+  .tagline {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-h3);
+    line-height: 1.3;
+    color: var(--color-near-black);
+  }
+
+  /* ---- Synopsis ---- */
+  .synopsis {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-body);
+    line-height: 1.5;
+    color: var(--color-near-black);
+    border-left: 2px solid var(--color-chocolate);
+    padding-left: var(--space-4);
+  }
+
+  /* ---- Specs grid ---- */
+  .specs {
+    display: flex; gap: var(--space-5); flex-wrap: wrap;
+  }
+  .spec-item { display: flex; flex-direction: column; gap: 0.15rem; }
+  .spec-label {
+    font-family: var(--font-tag);
+    font-weight: 500;
+    font-size: var(--text-caption);
+    text-transform: uppercase;
+    letter-spacing: 0;
+    line-height: 1.05;
+    color: var(--color-fg2);
+  }
+  .spec-value {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-body);
+    line-height: 1.5;
+    color: var(--color-near-black);
+  }
+
+  /* ---- CTA button ---- */
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    font-family: var(--font-tag);
+    font-weight: 500;
+    font-size: var(--text-caption);
+    text-transform: uppercase;
+    letter-spacing: 0;
+    line-height: 1.05;
+    color: var(--color-near-black);
+    background: var(--color-tangerine);
+    border: var(--border-rule);
+    padding: var(--space-3) var(--space-5);
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 0;
+    transition: background 200ms var(--ease-rough), color 200ms var(--ease-rough);
+  }
+  .cta:hover { background: var(--color-near-black); color: var(--color-off-white); }
+  .cta:focus-visible { outline: 2px solid var(--color-tangerine); outline-offset: 2px; border-radius: 0; }
+
+  /* ---- Marquee ---- */
   .marquee {
     overflow: hidden;
     white-space: nowrap;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 2.5rem;
     line-height: 0.7;
     text-transform: uppercase;
-    color: var(--chocolate);
-    opacity: 0.15;
-    margin: 0.5rem -2rem;
+    letter-spacing: 0;
+    color: var(--color-chocolate);
+    opacity: 0.12;
     user-select: none;
     pointer-events: none;
+    margin: 0 calc(-1 * var(--space-6));
   }
+
+  /* ---- Footer ---- */
+  .footer-strip {
+    border-top: var(--border-rule);
+    padding-top: var(--space-4);
+    font-family: var(--font-tag);
+    font-weight: 500;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    line-height: 1.05;
+    color: var(--color-fg2);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  /* ---- Logo SVG ---- */
+  .logo { height: 12px; width: auto; display: block; }
 </style>
 </head>
 <body>
 
 <div class="flyer">
 
-  <div class="eyebrow">
-    Rough &middot; Edinburgh &middot; Est. 2019
-  </div>
+  <!-- Book cover — full bleed image -->
+  <img
+    class="cover"
+    src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/5a9294260370a4b57358ae4e054ec31f?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080128Z&X-Amz-Expires=3600&X-Amz-Signature=3766c6429ceeb4d961292bd42c5e0a01aec6384c1cd8b3854c2307c98f4e454d&X-Amz-SignedHeaders=host"
+    alt="The Goldfinch — book cover"
+  >
 
-  <div class="hero">
-    The<br>Goldfinch
-  </div>
+  <div class="body-section">
 
-  <div class="tagline">
-    A book about football. Probably. Nobody's entirely sure — but it's got a bird on it and the binding suggests sport.
-  </div>
-
-  <div class="synopsis">
-    Part tactical analysis, part fever dream, part hardback that looked good on the shelf of a pub you can't quite remember the name of. 800 pages. No index. The chapters on set pieces have been described — by the one person who claims to have read them — as "unexpectedly moving."
-  </div>
-
-  <div class="specs">
-    <div>
-      <span class="label">Format</span>
-      <span class="value">Hardback, probably</span>
+    <!-- Eyebrow -->
+    <div class="eyebrow">
+      <span>Now in paperback</span>
+      <span>Rough Editions</span>
     </div>
-    <div>
-      <span class="label">Pages</span>
-      <span class="value">800+ (nobody's counted)</span>
+
+    <!-- Hero title with acid lime highlight -->
+    <div class="hero">The<br>Goldfinch</div>
+
+    <!-- Tagline -->
+    <p class="tagline">A book about football. Probably. Nobody's entirely sure — but it's got a bird on the cover and the binding suggests sport.</p>
+
+    <!-- Synopsis -->
+    <p class="synopsis">Part tactical analysis, part fever dream, part hardback that looked good on the shelf of a pub you can't quite remember the name of. 800 pages. No index. The chapters on set pieces have been described — by the one person who claims to have read them — as "unexpectedly moving."</p>
+
+    <!-- Specs -->
+    <div class="specs">
+      <div class="spec-item">
+        <span class="spec-label">Format</span>
+        <span class="spec-value">Hardback, probably</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Pages</span>
+        <span class="spec-value">800+ (nobody's counted)</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Cover</span>
+        <span class="spec-value">Bird. Definitely a bird.</span>
+      </div>
     </div>
-    <div>
-      <span class="label">Cover</span>
-      <span class="value">Bird. Definitely a bird.</span>
+
+    <!-- CTA — one tangerine button per view -->
+    <a href="#" class="cta">Buy the book · £14.99</a>
+
+    <!-- Marquee texture -->
+    <div class="marquee" aria-hidden="true">
+      Is there any football on tonight · The Goldfinch · Is there any football on tonight · The Goldfinch · Is there any football on tonight · The Goldfinch ·
     </div>
-  </div>
 
-  <a href="#" class="cta">Buy the book &middot; &pound;14.99</a>
+    <!-- Footer with logo -->
+    <div class="footer-strip">
+      <span>
+        <svg class="logo" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg" aria-label="Rough">
+          <text x="0" y="32" font-family="FoundersGroteskXCond, Impact, sans-serif" font-weight="700" font-size="38" fill="#272727" letter-spacing="0">rough</text>
+        </svg>
+      </span>
+      <span>Flyer #001 · Printed in Scotland</span>
+    </div>
 
-  <div class="marquee" aria-hidden="true">
-    Is there any football on tonight &middot; The Goldfinch &middot; Is there any football on tonight &middot; The Goldfinch &middot;
-  </div>
-
-  <div class="footer-strip">
-    <span>Rough Studio &middot; rough.ink</span>
-    <span>Flyer #001 &middot; Printed in Scotland</span>
   </div>
 
 </div>
