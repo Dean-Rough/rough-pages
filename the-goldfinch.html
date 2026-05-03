@@ -1,263 +1,448 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Goldfinch — Rough</title>
-<style>
-  @font-face {
-    font-family: "FoundersGroteskXCond";
-    src: url("fonts/FoundersGroteskXCond-Bold.otf") format("opentype");
-    font-weight: 700; font-style: normal; font-display: swap;
-  }
-  @font-face {
-    font-family: "Sohne";
-    src: url("fonts/Sohne-Kraftig.ttf") format("truetype");
-    font-weight: 500; font-style: normal; font-display: swap;
-  }
-  @font-face {
-    font-family: "SohneBreit";
-    src: url("fonts/SohneBreit-Kraftig.ttf") format("truetype");
-    font-weight: 500; font-style: normal; font-display: swap;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Goldfinch — Rough</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23272727'/><text x='4' y='24' font-family='sans-serif' font-weight='700' font-size='22' fill='%23EDEFE9'>R</text></svg>">
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────── */
+    :root {
+      --near-black:    #272727;
+      --off-white:     #EDEFE9;
+      --tangerine:    #FC8143;
+      --acid-lime:    #ECFEA7;
+      --chocolate:    #6D422E;
+      --lilac:        #BFACF8;
+      --pink:         #F8C8D8;
+      --fg1:          #272727;
+      --fg2:          #5A5A5A;
+      --fg-inverse:   #EDEFE9;
+      --bg1:          #EDEFE9;
+      --bg2:          #E2E4DD;
+      --border:       #272727;
+    }
 
-  :root {
-    --color-near-black: #272727;
-    --color-off-white: #edefe9;
-    --color-chocolate: #6d422e;
-    --color-tangerine: #fc8143;
-    --color-acid-lime: #ecfea7;
-    --color-fg1: var(--color-near-black);
-    --color-fg2: #5a5a5a;
-    --font-display: "FoundersGroteskXCond", "Impact", "Helvetica Neue Condensed", sans-serif;
-    --font-body: "Sohne", "Söhne", "Helvetica Neue", Arial, sans-serif;
-    --font-tag: "SohneBreit", "Sohne", "Helvetica Neue", Arial, sans-serif;
-    /* 8px grid: 4 8 12 16 24 32 48 64 96 128 */
-    --s-4: 0.25rem; --s-8: 0.5rem; --s-12: 0.75rem;
-    --s-16: 1rem; --s-24: 1.5rem; --s-32: 2rem;
-    --border-rule: 1px solid var(--color-near-black);
-    --ease-rough: cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
+    @font-face {
+      font-family: 'FoundersGroteskXCond';
+      src: url('fonts/FoundersGroteskXCond-Bold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Sohne';
+      src: url('fonts/Sohne-Kraftig.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'SohneBreit';
+      src: url('fonts/SohneBreit-Kraftig.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { background: var(--color-off-white); color: var(--color-near-black); }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 0.9375rem;
-    line-height: 1.5;
-    letter-spacing: 0;
-    color: var(--color-near-black);
-    background: var(--color-off-white);
-    -webkit-font-smoothing: antialiased;
-    display: grid; place-items: center;
-    min-height: 100vh; padding: var(--s-16);
-  }
+    /* ─── Base ──────────────────────────────────────────────── */
+    html, body {
+      background-color: var(--near-black);
+      color: var(--off-white);
+      font-family: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 500;
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  ::selection { background: var(--color-acid-lime); color: var(--color-near-black); }
+    /* ─── Layout ────────────────────────────────────────────── */
+    .page {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
 
-  .flyer {
-    width: 100%;
-    max-width: 400px;
-    background: var(--color-off-white);
-    border: var(--border-rule);
-    display: grid;
-    grid-template-rows: auto 1fr;
-  }
+    /* ─── Header Bar ───────────────────────────────────────── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--off-white);
+      margin-bottom: 3rem;
+    }
 
-  .cover {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    display: block;
-    border-bottom: var(--border-rule);
-  }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
 
-  .body-section {
-    padding: var(--s-24);
-    display: grid;
-    gap: var(--s-16);
-  }
+    .tag-label {
+      font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(0.625rem, 0.8vw, 0.75rem);
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: var(--off-white);
+    }
 
-  .eyebrow {
-    font-family: var(--font-tag);
-    font-weight: 500;
-    font-size: 0.625rem;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    line-height: 1.05;
-    border-bottom: var(--border-rule);
-    padding-bottom: var(--s-8);
-    display: grid;
-    grid-template-columns: 1fr auto;
-  }
+    /* ─── Main Split ────────────────────────────────────────── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      flex: 1;
+      border: 1px solid var(--off-white);
+    }
 
-  .hero {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 3rem;
-    line-height: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    background: var(--color-acid-lime);
-    padding: var(--s-16);
-  }
+    .hero-left {
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--off-white);
+    }
 
-  .tagline {
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 1.125rem;
-    line-height: 1.3;
-  }
+    .hero-right {
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      background: var(--off-white);
+      color: var(--near-black);
+    }
 
-  .synopsis {
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border-left: 2px solid var(--color-chocolate);
-    padding-left: var(--s-12);
-  }
+    /* ─── Bird Illustration ────────────────────────────────── */
+    .bird-wrap {
+      margin-bottom: 2rem;
+    }
 
-  .specs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-12);
-  }
-  .spec-item { display: grid; gap: 0.125rem; }
-  .spec-label {
-    font-family: var(--font-tag);
-    font-weight: 500;
-    font-size: 0.5625rem;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    line-height: 1.05;
-    color: var(--color-fg2);
-  }
-  .spec-value {
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 0.8125rem;
-    line-height: 1.5;
-  }
+    .bird-wrap svg {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      display: block;
+    }
 
-  .cta {
-    display: inline-grid;
-    place-self: start;
-    font-family: var(--font-tag);
-    font-weight: 500;
-    font-size: 0.6875rem;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    line-height: 1.05;
-    color: var(--color-near-black);
-    background: var(--color-tangerine);
-    border: var(--border-rule);
-    padding: var(--s-8) var(--s-16);
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: 0;
-    transition: background 200ms var(--ease-rough), color 200ms var(--ease-rough);
-  }
-  .cta:hover { background: var(--color-near-black); color: var(--color-off-white); }
-  .cta:focus-visible { outline: 2px solid var(--color-tangerine); outline-offset: 2px; border-radius: 0; }
+    /* ─── Typography ────────────────────────────────────────── */
+    .title-display {
+      font-family: 'FoundersGroteskXCond', Impact, 'Helvetica Neue Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(4.5rem, 12vw + 1rem, 8.75rem);
+      line-height: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: var(--off-white);
+      margin-bottom: 2rem;
+    }
 
-  .marquee {
-    overflow: hidden;
-    white-space: nowrap;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 2rem;
-    line-height: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    color: var(--color-chocolate);
-    opacity: 0.12;
-    user-select: none;
-    pointer-events: none;
-    margin: 0 calc(-1 * var(--s-24));
-  }
+    .subtitle {
+      font-family: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 500;
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      line-height: 1.3;
+      color: var(--off-white);
+      margin-bottom: 1rem;
+    }
 
-  .footer-strip {
-    border-top: var(--border-rule);
-    padding-top: var(--s-12);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: flex-end;
-    gap: var(--s-12);
-  }
+    .subtitle em {
+      font-style: normal;
+      color: var(--tangerine);
+    }
 
-  .footer-logos {
-    display: flex; align-items: flex-end; gap: var(--s-8);
-  }
+    .body-text {
+      font-size: clamp(0.875rem, 1vw + 0.25rem, 1rem);
+      line-height: 1.5;
+      color: var(--fg2);
+      color: rgba(237, 239, 233, 0.6);
+    }
 
-  .logo-mark { height: 14px; width: auto; display: block; }
-  .wordmark { height: 12px; width: auto; display: block; }
+    /* ─── Spec Block (right panel) ─────────────────────────── */
+    .spec-label {
+      font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(0.625rem, 0.8vw, 0.75rem);
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: var(--fg1);
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
 
-  .footer-tag {
-    font-family: var(--font-tag);
-    font-weight: 500;
-    font-size: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    line-height: 1.05;
-    color: var(--color-fg2);
-    text-align: right;
-  }
-</style>
+    .spec-headline {
+      font-family: 'FoundersGroteskXCond', Impact, 'Helvetica Neue Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 0.85;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: var(--near-black);
+      margin-bottom: 2rem;
+    }
+
+    .spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .spec-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      font-size: clamp(0.875rem, 1vw + 0.25rem, 1rem);
+      line-height: 1.4;
+      color: var(--near-black);
+    }
+
+    .spec-list li::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--tangerine);
+      flex-shrink: 0;
+      margin-top: 0.5em;
+    }
+
+    .spec-highlight {
+      background: var(--acid-lime);
+      padding: 0.75rem 1rem;
+      margin-bottom: 2rem;
+      border-left: 3px solid var(--near-black);
+    }
+
+    .spec-highlight p {
+      font-size: clamp(0.875rem, 1vw + 0.25rem, 1rem);
+      line-height: 1.4;
+      color: var(--near-black);
+    }
+
+    /* ─── CTA ───────────────────────────────────────────────── */
+    .cta-primary {
+      display: inline-block;
+      background: var(--tangerine);
+      color: var(--near-black);
+      font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(0.75rem, 0.8vw, 0.875rem);
+      text-transform: uppercase;
+      letter-spacing: 0;
+      text-decoration: none;
+      padding: 0.875rem 1.75rem;
+      border: none;
+      cursor: pointer;
+      transition: background 200ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .cta-primary:hover {
+      background: var(--off-white);
+    }
+
+    /* ─── Marquee ───────────────────────────────────────────── */
+    .marquee-bar {
+      overflow: hidden;
+      border-top: 1px solid var(--off-white);
+      border-bottom: 1px solid var(--off-white);
+      padding: 0.75rem 0;
+      margin-top: 3rem;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 4rem;
+      animation: marquee 24s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-track span {
+      font-family: 'FoundersGroteskXCond', Impact, 'Helvetica Neue Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.875rem, 1vw, 1rem);
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: var(--off-white);
+      white-space: nowrap;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── Footer Bar ───────────────────────────────────────── */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--off-white);
+      margin-top: 2rem;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'FoundersGroteskXCond', Impact, 'Helvetica Neue Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: var(--off-white);
+      text-decoration: none;
+    }
+
+    .footer-tagline {
+      font-size: clamp(0.625rem, 0.8vw, 0.75rem);
+      color: rgba(237, 239, 233, 0.5);
+    }
+
+    .barcode {
+      font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.625rem;
+      letter-spacing: 0.1em;
+      color: rgba(237, 239, 233, 0.4);
+      text-transform: uppercase;
+    }
+
+    /* ─── Responsive ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-left {
+        border-right: none;
+        border-bottom: 1px solid var(--off-white);
+      }
+      .hero-right {
+        padding-top: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<article class="flyer">
+<div class="page">
 
-  <img class="cover" src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/5a9294260370a4b57358ae4e054ec31f?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080128Z&X-Amz-Expires=3600&X-Amz-Signature=3766c6429ceeb4d961292bd42c5e0a01aec6384c1cd8b3854c2307c98f4e454d&X-Amz-SignedHeaders=host" alt="The Goldfinch — book cover">
+  <!-- Header -->
+  <header class="header">
+    <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" fill="#EDEFE9"/>
+      <text x="4" y="24" font-family="sans-serif" font-weight="700" font-size="22" fill="#272727">R</text>
+    </svg>
+    <span class="tag-label">Rough Ink — Edinburgh</span>
+  </header>
 
-  <div class="body-section">
+  <!-- Hero Grid -->
+  <main class="hero">
 
-    <div class="eyebrow">
-      <span>Now in paperback</span>
-      <span>Rough Editions</span>
+    <!-- Left: Title + Bird + Body -->
+    <div class="hero-left">
+
+      <div>
+        <!-- Goldfinch SVG illustration -->
+        <div class="bird-wrap">
+          <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Branch -->
+            <line x1="20" y1="140" x2="220" y2="120" stroke="#EDEFE9" stroke-width="3" stroke-linecap="round"/>
+            <line x1="60" y1="145" x2="80" y2="130" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round"/>
+            <line x1="160" y1="128" x2="175" y2="118" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round"/>
+            <!-- Bird body -->
+            <ellipse cx="120" cy="90" rx="42" ry="30" fill="#FC8143"/>
+            <!-- Wing -->
+            <ellipse cx="108" cy="85" rx="28" ry="18" fill="#6D422E"/>
+            <!-- Tail -->
+            <path d="M158 95 L190 80 L188 100 Z" fill="#6D422E"/>
+            <!-- Head -->
+            <circle cx="150" cy="72" r="18" fill="#FC8143"/>
+            <!-- Gold circle (trait signature) -->
+            <circle cx="150" cy="72" r="10" fill="#ECFEA7"/>
+            <circle cx="150" cy="72" r="6" fill="#FC8143"/>
+            <!-- Eye -->
+            <circle cx="156" cy="68" r="3" fill="#272727"/>
+            <!-- Beak -->
+            <path d="M166 72 L185 70 L166 76 Z" fill="#ECFEA7"/>
+            <!-- Legs -->
+            <line x1="115" y1="118" x2="112" y2="138" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round"/>
+            <line x1="130" y1="116" x2="133" y2="136" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round"/>
+            <!-- Feet -->
+            <path d="M108 138 L112 138 L112 142" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M129 136 L133 136 L133 140" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <h1 class="title-display">The<br>Goldfinch</h1>
+
+        <p class="subtitle">
+          A novel about <em>football</em>.<br>
+          Probably.
+        </p>
+
+        <p class="body-text">
+          800 pages. One small bird. A bomb in a museum.<br>
+          Not a single person has finished it.
+        </p>
+      </div>
+
+      <div>
+        <div class="marquee-bar" aria-hidden="true">
+          <div class="marquee-track">
+            <span>The Goldfinch &nbsp;&nbsp;—&nbsp;&nbsp; Donna Tartt &nbsp;&nbsp;—&nbsp;&nbsp; Pulitzer Prize Winner &nbsp;&nbsp;—&nbsp;&nbsp; 800 Pages &nbsp;&nbsp;—&nbsp;&nbsp; No Index &nbsp;&nbsp;—&nbsp;&nbsp; The Goldfinch &nbsp;&nbsp;—&nbsp;&nbsp; Donna Tartt &nbsp;&nbsp;—&nbsp;&nbsp; Pulitzer Prize Winner &nbsp;&nbsp;—&nbsp;&nbsp; 800 Pages &nbsp;&nbsp;—&nbsp;&nbsp; No Index &nbsp;&nbsp;—&nbsp;&nbsp;</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <h1 class="hero">The<br>Goldfinch</h1>
+    <!-- Right: Spec / Details -->
+    <div class="hero-right">
 
-    <p class="tagline">A book about football. Probably. Nobody's entirely sure — but it's got a bird on the cover and the binding suggests sport.</p>
+      <p class="spec-label">About the book</p>
 
-    <p class="synopsis">Part tactical analysis, part fever dream, part hardback that looked good on the shelf of a pub you can't quite remember the name of. 800 pages. No index. The chapters on set pieces have been described — by the one person who claims to have read them — as "unexpectedly moving."</p>
+      <h2 class="spec-headline">One Boy.<br>One Bird.<br>One Bomb.</h2>
 
-    <div class="specs">
-      <div class="spec-item">
-        <span class="spec-label">Format</span>
-        <span class="spec-value">Hardback, probably</span>
+      <ul class="spec-list">
+        <li>800 pages of life-affirming prose</li>
+        <li>The friend you'll never finish</li>
+        <li>Pulitzer Prize for Fiction, 2014</li>
+        <li>Carel Fabritius's goldfinch on the cover — the actual painting is in the Mauritshuis, The Hague</li>
+        <li>Contains more plot than strictly necessary</li>
+      </ul>
+
+      <div class="spec-highlight">
+        <p>The perfect gift for someone who already owns it.</p>
       </div>
-      <div class="spec-item">
-        <span class="spec-label">Pages</span>
-        <span class="spec-value">800+ (nobody's counted)</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Cover</span>
-        <span class="spec-value">Bird. Definitely a bird.</span>
-      </div>
+
+      <a href="#" class="cta-primary">Buy Now — £28</a>
+
     </div>
 
-    <a href="#" class="cta">Buy the book · £14.99</a>
+  </main>
 
-    <div class="marquee" aria-hidden="true">
-      Is there any football on tonight · The Goldfinch · Is there any football on tonight · The Goldfinch · Is there any football on tonight · The Goldfinch ·
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-left">
+      <a href="#" class="footer-logo">Rough</a>
+      <span class="footer-tagline">Interior Design — Edinburgh</span>
     </div>
+    <span class="barcode">ISBN 978-0-316-22519-5</span>
+  </footer>
 
-    <div class="footer-strip">
-      <div class="footer-logos">
-        <img class="logo-mark" src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/9fb8e236d9e609f4c565e4f822a0d5dc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080811Z&X-Amz-Expires=3600&X-Amz-Signature=c1f30ed41997a70adebd1ed8d3bfb0f8205894c7776ff080ed5a84ba30468063&X-Amz-SignedHeaders=host" alt="Rough mark">
-        <img class="wordmark" src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/985ca3912674123b07efda667b9f8051?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080812Z&X-Amz-Expires=3600&X-Amz-Signature=f290fefeb00f0911867ccf6ab27cead4d9a0da537723250e070a9951b8405972&X-Amz-SignedHeaders=host" alt="Rough">
-      </div>
-      <span class="footer-tag">Flyer #001 · Printed in Scotland</span>
-    </div>
-
-  </div>
-
-</article>
+</div>
 
 </body>
 </html>
