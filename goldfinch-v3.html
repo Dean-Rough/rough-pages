@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Goldfinch — Rough Editions</title>
+<style>
+  @font-face {
+    font-family: "FoundersGroteskXCond";
+    src: url("fonts/FoundersGroteskXCond-Bold.otf") format("opentype");
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "Sohne";
+    src: url("fonts/Sohne-Kraftig.ttf") format("truetype");
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "SohneBreit";
+    src: url("fonts/SohneBreit-Kraftig.ttf") format("truetype");
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --near-black: #272727;
+    --off-white: #EDEFE9;
+    --tangerine: #FC8143;
+    --acid-lime: #ECFEA7;
+    --chocolate: #6D422E;
+  }
+
+  body {
+    background: var(--off-white);
+    color: var(--near-black);
+    font-family: "Sohne", sans-serif;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+  }
+
+  .card {
+    width: 400px;
+    border: 1px solid var(--near-black);
+    background: var(--off-white);
+    overflow: hidden;
+  }
+
+  .hero {
+    background: var(--acid-lime);
+    padding: 48px 24px 24px 24px;
+  }
+
+  .hero h1 {
+    font-family: "FoundersGroteskXCond", sans-serif;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 0.7;
+    text-transform: uppercase;
+    color: var(--near-black);
+  }
+
+  .tagline {
+    font-family: "Sohne", sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--near-black);
+    padding: 24px 24px 4px 24px;
+    line-height: 1.35;
+  }
+
+  .synopsis {
+    font-family: "Sohne", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--near-black);
+    padding: 8px 24px 24px 24px;
+    line-height: 1.5;
+    border-left: 2px solid var(--chocolate);
+    margin: 8px 24px 24px 24px;
+    padding: 0 0 0 12px;
+  }
+
+  .specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 0 24px 24px 24px;
+  }
+
+  .spec-label {
+    font-family: "SohneBreit", sans-serif;
+    font-weight: 500;
+    font-size: 9px;
+    text-transform: uppercase;
+    color: #5A5A5A;
+    display: block;
+  }
+
+  .spec-value {
+    font-family: "Sohne", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--near-black);
+  }
+
+  .cta {
+    display: block;
+    background: var(--tangerine);
+    padding: 8px 24px;
+    margin: 0 24px 24px 24px;
+    font-family: "SohneBreit", sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--near-black);
+    border: 1px solid var(--near-black);
+    text-align: center;
+    cursor: pointer;
+    transition: background 200ms ease, color 200ms ease;
+  }
+  .cta:hover { background: var(--near-black); color: var(--off-white); }
+
+  .marquee-wrap {
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 1px solid var(--near-black);
+    padding: 8px 0;
+    margin: 0 24px;
+  }
+
+  .marquee {
+    display: inline-block;
+    font-family: "FoundersGroteskXCond", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: var(--chocolate);
+    opacity: 0.1;
+    animation: scroll 12s linear infinite;
+  }
+
+  @keyframes scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .footer {
+    padding: 12px 24px;
+    border-top: 1px solid var(--near-black);
+    margin-top: 24px;
+    font-family: "SohneBreit", sans-serif;
+    font-weight: 500;
+    font-size: 8px;
+    text-transform: uppercase;
+    color: #5A5A5A;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-logos { display: flex; gap: 8px; align-items: flex-end; }
+  .logo-mark { height: 14px; width: auto; }
+  .wordmark { height: 12px; width: auto; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="hero">
+    <h1>THE<br>GOLDFINCH</h1>
+  </div>
+
+  <div class="tagline">A book about football. Probably. Nobody's entirely sure — but it's got a bird on the cover and the binding suggests sport.</div>
+
+  <div class="synopsis">Part tactical analysis, part fever dream, part hardback that looked good on the shelf of a pub you can't quite remember the name of. 800 pages. No index.</div>
+
+  <div class="specs">
+    <div><span class="spec-label">Format</span><span class="spec-value">Hardback, probably</span></div>
+    <div><span class="spec-label">Pages</span><span class="spec-value">800+ (nobody's counted)</span></div>
+    <div><span class="spec-label">Cover</span><span class="spec-value">Bird. Definitely a bird.</span></div>
+  </div>
+
+  <a href="#" class="cta">Buy the book &middot; &pound;14.99</a>
+
+  <div class="marquee-wrap">
+    <div class="marquee">
+      Is there any football on tonight &middot; The Goldfinch &middot;
+      Is there any football on tonight &middot; The Goldfinch &middot;
+      Is there any football on tonight &middot; The Goldfinch &middot;
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-logos">
+      <img class="logo-mark" src="assets/rough-mark.svg" alt="Rough">
+      <img class="wordmark" src="assets/rough-wordmark.svg" alt="Rough">
+    </div>
+    Flyer #001 &middot; Printed in Scotland
+  </div>
+</div>
+
+</body>
+</html>
