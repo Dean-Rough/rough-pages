@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5048 Eala Bhán → The White Swan — Rough</title>
+<style>
+  @font-face {
+    font-family: "FoundersGroteskXCond";
+    src: url("https://rough-ink.vercel.app/fonts/FoundersGroteskXCond-Bold.otf") format("opentype");
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "Sohne";
+    src: url("https://rough-ink.vercel.app/fonts/Sohne-Kraftig.ttf") format("truetype");
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "SohneBreit";
+    src: url("https://rough-ink.vercel.app/fonts/SohneBreit-Kraftig.ttf") format("truetype");
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --near-black: #272727; --off-white: #edefe9;
+    --chocolate: #6d422e; --tangerine: #fc8143;
+    --acid-lime: #ecfea7; --lilac: #bfacf8; --pink: #f8c8d8;
+    --fg1: var(--near-black); --fg2: #5a5a5a;
+    --font-display: "FoundersGroteskXCond", "Impact", "Helvetica Neue Condensed", sans-serif;
+    --font-body: "Sohne", "Söhne", "Helvetica Neue", Arial, sans-serif;
+    --font-tag: "SohneBreit", "Sohne", "Helvetica Neue", Arial, sans-serif;
+    --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --slide-w: 1400; --slide-h: 990;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--near-black);
+    background: var(--off-white);
+    -webkit-font-smoothing: antialiased;
+    display: grid; place-items: center;
+    min-height: 100vh;
+  }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    display: grid; place-items: center;
+    overflow: hidden;
+  }
+
+  .slides {
+    width: min(100vw, calc(100vh * 1.414));
+    aspect-ratio: 1.414;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--near-black);
+    background: var(--off-white);
+  }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: none;
+    padding: 48px 64px;
+  }
+  .slide.active { display: grid; }
+
+  /* ---- Slide layouts ---- */
+  .slide-cover { grid-template-rows: 1fr auto; }
+  .slide-content { grid-template-rows: auto 1fr auto; gap: 24px; }
+  .slide-grid { grid-template-columns: 1fr 1fr; gap: 32px; align-content: center; }
+  .slide-grid-3 { grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-content: center; }
+  .slide-split { grid-template-columns: 1fr 1fr; gap: 48px; }
+  .slide-centre { place-items: center; text-align: center; }
+
+  /* ---- Typography ---- */
+  h1, .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    line-height: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0;
+  }
+  h2 {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    line-height: 1.05;
+  }
+  h3 {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.05;
+  }
+  p, li {
+    font-size: clamp(0.75rem, 1.1vw, 0.9375rem);
+    line-height: 1.5;
+    max-width: 52ch;
+  }
+  .tag {
+    font-family: var(--font-tag);
+    font-weight: 500;
+    font-size: clamp(0.5rem, 0.7vw, 0.625rem);
+    text-transform: uppercase;
+    letter-spacing: 0;
+    line-height: 1.05;
+    color: var(--fg2);
+  }
+
+  /* ---- Components ---- */
+  .highlight { background: var(--acid-lime); padding: 0 0.15em; }
+  .rule { border-top: 1px solid var(--near-black); padding-top: 16px; }
+  .stat { font-family: var(--font-display); font-weight: 700; font-size: 3rem; line-height: 0.7; text-transform: uppercase; }
+  .stat-label { font-family: var(--font-tag); font-size: 0.5625rem; text-transform: uppercase; color: var(--fg2); margin-top: 4px; }
+
+  .card {
+    border: 1px solid var(--near-black);
+    padding: 24px;
+    display: grid; gap: 12px;
+  }
+  .card-accent { border-left: 3px solid var(--chocolate); }
+
+  .btn {
+    display: inline-grid; place-self: start;
+    font-family: var(--font-tag); font-weight: 500;
+    font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0; line-height: 1.05;
+    color: var(--near-black); background: var(--tangerine);
+    border: 1px solid var(--near-black); padding: 8px 16px;
+    text-decoration: none; border-radius: 0; cursor: pointer;
+    transition: background 200ms var(--ease), color 200ms var(--ease);
+  }
+  .btn:hover { background: var(--near-black); color: var(--off-white); }
+
+  .marquee-strip {
+    overflow: hidden; white-space: nowrap;
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 2rem; line-height: 0.7; text-transform: uppercase;
+    color: var(--chocolate); opacity: 0.1;
+    user-select: none; pointer-events: none;
+  }
+
+  .logo-row { display: flex; align-items: flex-end; gap: 8px; }
+  .logo-row img { height: 12px; width: auto; }
+
+  /* ---- Slide chrome ---- */
+  .slide-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+  .slide-footer {
+    border-top: 1px solid var(--near-black);
+    padding-top: 12px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: flex-end;
+    gap: 12px;
+  }
+  .page-num {
+    font-family: var(--font-tag);
+    font-size: 0.5rem; text-transform: uppercase; color: var(--fg2);
+  }
+
+  /* ---- Nav ---- */
+  .nav {
+    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 8px; z-index: 10;
+  }
+  .nav button {
+    font-family: var(--font-tag); font-size: 0.5625rem; text-transform: uppercase;
+    background: var(--off-white); border: 1px solid var(--near-black);
+    padding: 4px 12px; cursor: pointer; border-radius: 0;
+    transition: background 200ms var(--ease);
+  }
+  .nav button:hover { background: var(--near-black); color: var(--off-white); }
+  .nav button.active { background: var(--near-black); color: var(--off-white); }
+
+  @media (max-width: 800px) {
+    .slide { padding: 32px 24px; }
+    .slide-grid, .slide-grid-3, .slide-split { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+<div class="slides" id="slides">
+
+  <!-- 01 COVER -->
+  <div class="slide slide-cover active" data-slide="0">
+    <div style="display:grid;align-content:center;gap:16px;">
+      <div class="tag" style="padding-bottom:12px;border-bottom:1px solid var(--near-black);">Project 5048 · Star Pubs & Bars · Shawlands, Glasgow</div>
+      <div class="display" style="font-size:clamp(4rem,9vw,8rem);">The<br>White<br>Swan</div>
+      <div style="display:grid;gap:8px;">
+        <h2>A community pub for Shawlands</h2>
+        <p style="color:var(--fg2);">Eala Bhán → renamed and reimagined · 1534 Pollokshaws Road, G43 1RF · Budget £270,000</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="logo-row">
+        <img src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/9fb8e236d9e609f4c565e4f822a0d5dc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080811Z&X-Amz-Expires=3600&X-Amz-Signature=c1f30ed41997a70adebd1ed8d3bfb0f8205894c7776ff080ed5a84ba30468063&X-Amz-SignedHeaders=host" alt="Rough mark">
+        <img src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/985ca3912674123b07efda667b9f8051?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080812Z&X-Amz-Expires=3600&X-Amz-Signature=f290fefeb00f0911867ccf6ab27cead4d9a0da537723250e070a9951b8405972&X-Amz-SignedHeaders=host" alt="Rough">
+      </div>
+      <span class="page-num">01 · Cover</span>
+    </div>
+  </div>
+
+  <!-- 02 BRIEF -->
+  <div class="slide slide-content" data-slide="1">
+    <div class="slide-header">
+      <div>
+        <div class="tag" style="margin-bottom:8px;">Brief</div>
+        <h2>The brief in one line</h2>
+      </div>
+      <span class="page-num">02 · 08</span>
+    </div>
+    <div style="display:grid;gap:24px;align-content:start;">
+      <div class="display" style="font-size:clamp(2rem,4vw,3.5rem);">Community hub. <span class="highlight">Gold vintage signage</span> in the window. Modern trad pub, nothing fancy, cosy, designed for long stays.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+        <div class="card">
+          <div class="stat">£270k</div>
+          <div class="stat-label">Budget</div>
+        </div>
+        <div class="card">
+          <div class="stat">Star</div>
+          <div class="stat-label">Client · Star Pubs & Bars</div>
+        </div>
+        <div class="card">
+          <div class="stat">1901</div>
+          <div class="stat-label">Building · Tenement pub</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="logo-row">
+        <img src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/9fb8e236d9e609f4c565e4f822a0d5dc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080811Z&X-Amz-Expires=3600&X-Amz-Signature=c1f30ed41997a70adebd1ed8d3bfb0f8205894c7776ff080ed5a84ba30468063&X-Amz-SignedHeaders=host" alt="">
+        <img src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/985ca3912674123b07efda667b9f8051?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080812Z&X-Amz-Expires=3600&X-Amz-Signature=f290fefeb00f0911867ccf6ab27cead4d9a0da537723250e070a9951b8405972&X-Amz-SignedHeaders=host" alt="">
+      </div>
+      <span class="tag">1534 Pollokshaws Road, Shawlands, Glasgow, G43 1RF</span>
+    </div>
+  </div>
+
+  <!-- 03 DIRECTION -->
+  <div class="slide slide-grid" data-slide="2">
+    <div style="display:grid;gap:16px;">
+      <div class="tag">Direction</div>
+      <h2>Vintage Vibes → Modern trad pub</h2>
+      <p>Less smart bistro, more proper Glasgow local with care taken. The existing venue — Eala Bhán — trades as a daytime-to-late cafe-bar-restaurant. The offer reads scattered. Star wants it to compete properly in Shawlands' growing food and drink scene without losing the locals it already has.</p>
+      <p style="color:var(--fg2);">A 1968 photo shows the same tenement signed as "The Oak Tree Inn" — real heritage we can mine.</p>
+      <div class="rule" style="margin-top:8px;">
+        <div class="tag" style="margin-bottom:4px;">Gut check</div>
+        <p>Could you read a book here all afternoon? Would the gilded window sign look at home next to Bennets, Bow Bar, Café Royal?</p>
+      </div>
+    </div>
+    <div style="display:grid;gap:12px;align-content:start;">
+      <div class="card">
+        <div class="tag" style="margin-bottom:4px;">Reference pubs</div>
+        <p style="font-size:0.8125rem;">Bennets · Bow Bar · Café Royal · Babbity Bowster · Sloans · Blackbird — Glasgow/Edinburgh trad pub vernacular: gilded glass, sandstone, dark wood, brass rail, mosaic tile threshold</p>
+      </div>
+      <div class="card card-accent">
+        <div class="tag" style="margin-bottom:4px;">Not</div>
+        <p style="font-size:0.8125rem;">English home-counties gastropub pastiche. ESD is a starting reference, not a destination. Too Surrey to land in Shawlands as a Glasgow local.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 EXTERIOR -->
+  <div class="slide slide-split" data-slide="3">
+    <div style="display:grid;gap:16px;align-content:center;">
+      <div class="tag">Exterior</div>
+      <h2>Farrow & Ball Green Smoke No.47</h2>
+      <div style="width:100%;aspect-ratio:1.5;background:linear-gradient(135deg,#768572 0%,#6b7a67 50%,#5f6e5c 100%);border:1px solid var(--near-black);display:grid;place-items:center;">
+        <div style="font-family:var(--font-display);font-size:2.5rem;line-height:0.7;text-transform:uppercase;color:#d4a843;text-align:center;">The<br>White<br>Swan</div>
+      </div>
+      <p style="font-size:0.8125rem;">Every painted timber surface, fascia panel, column, door surround, canopy band and lower window framing in deep matt Green Smoke. Hand-gilded 23ct gold-leaf signage to front shopfront windows — "The White Swan" wordmark centred on the larger panels, sizing to read clearly from Pollokshaws Road.</p>
+    </div>
+    <div style="display:grid;gap:12px;align-content:center;">
+      <div class="card">
+        <div class="tag" style="margin-bottom:4px;">Shopfront works</div>
+        <ul style="list-style:none;display:grid;gap:8px;font-size:0.8125rem;line-height:1.5;">
+          <li>· Full repairs to rotten timbers and fascia along building length</li>
+          <li>· Repaint frontage in Green Smoke</li>
+          <li>· Remove every existing vinyl, menu box, amenity board</li>
+          <li>· New gilded signage — 23ct gold leaf, inside of glass</li>
+          <li>· Hanging painted-timber pub blade on wrought-iron bracket</li>
+          <li>· Wrought-iron hanging baskets — ivy and trailing geraniums</li>
+          <li>· Warm 2200K interior light spilling from front windows</li>
+          <li>· Remove satellite dishes, Heineken sign, window clutter</li>
+        </ul>
+      </div>
+      <div class="card card-accent">
+        <div class="tag" style="margin-bottom:4px;">The name</div>
+        <p style="font-size:0.8125rem;">"Eala Bhán" is Scottish Gaelic for white swan — roughly "AY-luh VAHN." Nobody outside Gaelic speakers can pronounce it. The new name keeps the heritage, makes it legible to everyone, and looks right gilded onto a window.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 INTERIOR -->
+  <div class="slide slide-grid" data-slide="4">
+    <div style="display:grid;gap:16px;">
+      <div class="tag">Interior · Spatial moves</div>
+      <h2>One continuous room</h2>
+      <p style="font-size:0.8125rem;">The big move: open the function area — strip the partition and door; make good. The room becomes one continuous run. A second servery in the extension with a feature metal back-bar set against exposed brick.</p>
+      <div style="display:grid;gap:8px;font-size:0.75rem;line-height:1.5;">
+        <div class="card card-accent" style="padding:12px;">
+          <div class="tag" style="margin-bottom:4px;">Material vocabulary</div>
+          <p>Distressed antique leather · Brass footrails · Antique brass ironmongery · Polished ash screens · Polished timber bar tops · Aged mirror and tiling to back-bar · Subtly distressed paint finishes · 2200K warm-white LED throughout · Feature wallpaper to upper toilet walls and dining-room frieze · Commercial-grade LVT in toilet wet areas</p>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;gap:12px;align-content:start;">
+      <div class="card">
+        <div class="tag" style="margin-bottom:4px;">Key finishes</div>
+        <ul style="list-style:none;display:grid;gap:8px;font-size:0.75rem;line-height:1.5;">
+          <li>· Calderdale Carpets contemporary houndstooth axminster — tan/black/cream</li>
+          <li>· Openback bentwood dining chair — fully upholstered</li>
+          <li>· Pooky Selene alabaster pendant on brass — 7-pendant cluster</li>
+          <li>· Arley House Baby Bombay print — aqua/burnt orange/citrus chintz</li>
+          <li>· High-level perimeter shelf — inset LED lip, backlit feature wallpaper</li>
+          <li>· Aged display shelves on vintage brackets — picture, ephemera, plants</li>
+          <li>· Six-seat booth in deep-button leather</li>
+          <li>· Three new back-bar assemblies — polished timber + metalwork</li>
+        </ul>
+      </div>
+      <div class="card" style="display:grid;gap:8px;">
+        <div class="tag">Dining area concept</div>
+        <p style="font-size:0.75rem;">Sage-green ceiling · exposed sandstone walls · alabaster pendant cluster · oxblood leather + patterned upholstery chairs · patterned rug · brass details. Quick viz on file — nudge from "ESD pastiche" toward Glasgow community local.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 WORK AREAS -->
+  <div class="slide slide-content" data-slide="5">
+    <div class="slide-header">
+      <div>
+        <div class="tag" style="margin-bottom:8px;">Scope</div>
+        <h2>Eleven work areas</h2>
+      </div>
+      <span class="page-num">06 · 08</span>
+    </div>
+    <div class="slide-grid-3" style="align-content:start;">
+      <div class="card"><div class="tag" style="margin-bottom:4px;">01–03</div><p style="font-size:0.75rem;">Toilets (F/M/Accessible) — feature wallpaper to upper walls, commercial LVT flooring, 2200K warm LED</p></div>
+      <div class="card"><div class="tag" style="margin-bottom:4px;">04</div><p style="font-size:0.75rem;">Front Area — window shelves, metal-framed lights, new gilded signage visible from street</p></div>
+      <div class="card"><div class="tag" style="margin-bottom:4px;">05</div><p style="font-size:0.75rem;">Bar (general/middle/main) — three new back-bar assemblies, polished timber + metalwork, aged mirror infill</p></div>
+      <div class="card"><div class="tag" style="margin-bottom:4px;">06</div><p style="font-size:0.75rem;">Snug — recovering existing fixed seating, distressed leather, warm intimate lighting</p></div>
+      <div class="card"><div class="tag" style="margin-bottom:4px;">07</div><p style="font-size:0.75rem;">Lounge / Dining — houndstooth carpet, alabaster pendant cluster, bentwood chairs, perimeter shelf</p></div>
+      <div class="card"><div class="tag" style="margin-bottom:4px;">08–09</div><p style="font-size:0.75rem;">Bar High Area · Mid Area — polished ash screens, vintage mid-century sideboards, brick-a-brac display</p></div>
+      <div class="card"><div class="tag" style="margin-bottom:4px;">10</div><p style="font-size:0.75rem;">Extension + Extension Toilets — second servery, feature metal back-bar against exposed brick</p></div>
+      <div class="card"><div class="tag" style="margin-bottom:4px;">11</div><p style="font-size:0.75rem;">TVs + Structural · Beer Garden / Exterior — remove fireplace, full exterior repairs, new planting</p></div>
+      <div class="card" style="background:var(--acid-lime);"><div class="tag">Always</div><p style="font-size:0.75rem;">Pass wall clad in panelling · Pass aperture reduced · High-level fixed seat with brass footrail · Distressed antique leather throughout</p></div>
+    </div>
+    <div class="slide-footer">
+      <div class="logo-row">
+        <img src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/9fb8e236d9e609f4c565e4f822a0d5dc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080811Z&X-Amz-Expires=3600&X-Amz-Signature=c1f30ed41997a70adebd1ed8d3bfb0f8205894c7776ff080ed5a84ba30468063&X-Amz-SignedHeaders=host" alt="">
+        <img src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/985ca3912674123b07efda667b9f8051?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080812Z&X-Amz-Expires=3600&X-Amz-Signature=f290fefeb00f0911867ccf6ab27cead4d9a0da537723250e070a9951b8405972&X-Amz-SignedHeaders=host" alt="">
+      </div>
+      <span class="tag">From meeting minutes 25 March 2026 + Proposed GF Plan</span>
+    </div>
+  </div>
+
+  <!-- 07 DELIVERABLES -->
+  <div class="slide slide-grid" data-slide="6">
+    <div style="display:grid;gap:16px;">
+      <div class="tag">Deliverables</div>
+      <h2>What's been done</h2>
+      <div style="display:grid;gap:12px;">
+        <div class="card"><div class="tag" style="margin-bottom:2px;">Naming scheme</div><p style="font-size:0.75rem;">Shortlist delivered — "The White Swan" leads. Single word, looks right gilded, keeps the Gaelic heritage.</p></div>
+        <div class="card"><div class="tag" style="margin-bottom:2px;">Mood board</div><p style="font-size:0.75rem;">Interactive HTML mood board on file — vintage Glasgow trad pub, warm dim layered.</p></div>
+        <div class="card"><div class="tag" style="margin-bottom:2px;">Exterior concept render</div><p style="font-size:0.75rem;">Green Smoke painted shopfront + gilded White Swan signage — generated via Nano Banana 2 Pro + OpenAI at max resolution, 4:3 landscape.</p></div>
+        <div class="card"><div class="tag" style="margin-bottom:2px;">Mood collage render</div><p style="font-size:0.75rem;">A3 landscape editorial collage — 12–15 material and interior images, Farrow & Ball palette, brass accents. Photographic realism.</p></div>
+        <div class="card"><div class="tag" style="margin-bottom:2px;">CAPEX brochure</div><p style="font-size:0.75rem;">132MB Keynote delivered — v1, April 2026. Full scheme, materials, costs, programme.</p></div>
+      </div>
+    </div>
+    <div style="display:grid;gap:16px;align-content:start;">
+      <h2>Open questions</h2>
+      <div style="display:grid;gap:12px;">
+        <div class="card card-accent">
+          <div class="tag" style="margin-bottom:4px;">Renaming</div>
+          <p style="font-size:0.75rem;">Is renaming definitely on the table with Star, or is "Eala Bhán" sentimental for the operator? Confirmed pronunciation/etymology to retain, or full reset?</p>
+        </div>
+        <div class="card">
+          <div class="tag" style="margin-bottom:4px;">Food offer</div>
+          <p style="font-size:0.75rem;">Same all-day spread post-refurb, or sharpened? Affects whether we lean "pub with proper food" vs "pub-pub."</p>
+        </div>
+        <div class="card">
+          <div class="tag" style="margin-bottom:4px;">Beer garden</div>
+          <p style="font-size:0.75rem;">Is there budget headroom for a real outdoor scheme, or strictly tidy + signage?</p>
+        </div>
+        <div class="card">
+          <div class="tag" style="margin-bottom:4px;">Function suite</div>
+          <p style="font-size:0.75rem;">Does it stay as a separately-bookable room, or does opening it up merge it into the main pub?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 THANK YOU -->
+  <div class="slide slide-centre" data-slide="7">
+    <div style="display:grid;gap:24px;text-align:center;place-items:center;">
+      <div class="display" style="font-size:clamp(2.5rem,5vw,4rem);">Thank<br>you</div>
+      <div style="display:grid;gap:8px;">
+        <h2>The White Swan · Project 5048</h2>
+        <p style="color:var(--fg2);">Rough Studio · Edinburgh · Glasgow · rough.ink</p>
+      </div>
+      <div style="display:flex;gap:16px;">
+        <div class="logo-row">
+          <img src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/9fb8e236d9e609f4c565e4f822a0d5dc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080811Z&X-Amz-Expires=3600&X-Amz-Signature=c1f30ed41997a70adebd1ed8d3bfb0f8205894c7776ff080ed5a84ba30468063&X-Amz-SignedHeaders=host" alt="" style="height:20px;">
+          <img src="https://temp.4d4f16c61d89ec64e760039c4ec50717.r2.cloudflarestorage.com/428232/googledrive/GOOGLEDRIVE_DOWNLOAD_FILE/response/985ca3912674123b07efda667b9f8051?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=a972c0e6c710f42db4e67fe0ce139aa0%2F20260503%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260503T080812Z&X-Amz-Expires=3600&X-Amz-Signature=f290fefeb00f0911867ccf6ab27cead4d9a0da537723250e070a9951b8405972&X-Amz-SignedHeaders=host" alt="" style="height:18px;">
+        </div>
+      </div>
+      <div class="marquee-strip" style="width:100%;">
+        Community hub · Gold vintage signage · Modern trad pub · Cosy · Long stays · Community hub · Gold vintage signage · Modern trad pub · Cosy · Long stays ·
+      </div>
+    </div>
+    <span class="page-num" style="position:absolute;bottom:48px;right:64px;">08 · 08</span>
+  </div>
+
+  <!-- Nav dots -->
+  <div class="nav" id="nav"></div>
+
+</div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const nav = document.getElementById('nav');
+  let current = 0;
+
+  slides.forEach((s,i) => {
+    const btn = document.createElement('button');
+    btn.textContent = i+1;
+    btn.onclick = () => go(i);
+    if(i===0) btn.classList.add('active');
+    nav.appendChild(btn);
+  });
+
+  function go(i) {
+    slides[current].classList.remove('active');
+    nav.children[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    nav.children[current].classList.add('active');
+  }
+
+  document.addEventListener('keydown', e => {
+    if(e.key==='ArrowRight'||e.key==='ArrowDown') go(Math.min(current+1, slides.length-1));
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp') go(Math.max(current-1, 0));
+  });
+
+  let touchX;
+  document.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    const dx = touchX - e.changedTouches[0].clientX;
+    if(Math.abs(dx) > 50) dx > 0 ? go(Math.min(current+1, slides.length-1)) : go(Math.max(current-1, 0));
+  });
+</script>
+
+</body>
+</html>
