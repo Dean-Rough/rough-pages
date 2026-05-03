@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Goldfinch — Rough</title>
+<style>
+  @font-face {
+    font-family: 'FoundersGroteskXCond';
+    src: url('fonts/FoundersGroteskXCond-Bold.otf') format('opentype');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Sohne';
+    src: url('fonts/Sohne-Kraftig.ttf') format('truetype');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'SohneBreit';
+    src: url('fonts/SohneBreit-Kraftig.ttf') format('truetype');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --near-black: #272727;
+    --off-white: #EDEFE9;
+    --chocolate: #6D422E;
+    --tangerine: #FC8143;
+    --acid-lime: #ECFEA7;
+    --lilac: #BFACF8;
+    --pink: #F8C8D8;
+    --font-display: 'FoundersGroteskXCond', 'Impact', sans-serif;
+    --font-body: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+    --font-tag: 'SohneBreit', 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--near-black);
+    background: var(--off-white);
+    -webkit-font-smoothing: antialiased;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 2rem;
+  }
+
+  .flyer {
+    width: 420px;
+    background: var(--off-white);
+    border: 1px solid var(--near-black);
+    padding: 2rem;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+
+  .eyebrow {
+    font-family: var(--font-tag);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: var(--near-black);
+    border-bottom: 1px solid var(--near-black);
+    padding-bottom: 0.5rem;
+  }
+
+  .hero {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 3.5rem;
+    line-height: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    background: var(--acid-lime);
+    padding: 1.25rem;
+    margin: -0.25rem;
+  }
+
+  .tagline {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.3;
+    color: var(--near-black);
+    max-width: 32ch;
+  }
+
+  .synopsis {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--near-black);
+    border-left: 3px solid var(--chocolate);
+    padding-left: 1rem;
+    max-width: 40ch;
+  }
+
+  .specs {
+    display: flex; gap: 1.5rem;
+    font-family: var(--font-tag);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+  }
+
+  .specs span { display: block; }
+  .specs .label { color: #5A5A5A; margin-bottom: 0.15rem; }
+  .specs .value { color: var(--near-black); }
+
+  .cta {
+    display: inline-block;
+    font-family: var(--font-tag);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: var(--near-black);
+    background: var(--tangerine);
+    border: 1px solid var(--near-black);
+    padding: 0.6rem 1.5rem;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: background 200ms cubic-bezier(0.25, 0.1, 0.25, 1), color 200ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .cta:hover {
+    background: var(--near-black);
+    color: var(--off-white);
+  }
+
+  .footer-strip {
+    border-top: 1px solid var(--near-black);
+    padding-top: 0.75rem;
+    font-family: var(--font-tag);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: #5A5A5A;
+    display: flex; justify-content: space-between;
+  }
+
+  .marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 0.7;
+    text-transform: uppercase;
+    color: var(--chocolate);
+    opacity: 0.15;
+    margin: 0.5rem -2rem;
+    user-select: none;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="flyer">
+
+  <div class="eyebrow">
+    Rough &middot; Edinburgh &middot; Est. 2019
+  </div>
+
+  <div class="hero">
+    The<br>Goldfinch
+  </div>
+
+  <div class="tagline">
+    A book about football. Probably. Nobody's entirely sure — but it's got a bird on it and the binding suggests sport.
+  </div>
+
+  <div class="synopsis">
+    Part tactical analysis, part fever dream, part hardback that looked good on the shelf of a pub you can't quite remember the name of. 800 pages. No index. The chapters on set pieces have been described — by the one person who claims to have read them — as "unexpectedly moving."
+  </div>
+
+  <div class="specs">
+    <div>
+      <span class="label">Format</span>
+      <span class="value">Hardback, probably</span>
+    </div>
+    <div>
+      <span class="label">Pages</span>
+      <span class="value">800+ (nobody's counted)</span>
+    </div>
+    <div>
+      <span class="label">Cover</span>
+      <span class="value">Bird. Definitely a bird.</span>
+    </div>
+  </div>
+
+  <a href="#" class="cta">Buy the book &middot; &pound;14.99</a>
+
+  <div class="marquee" aria-hidden="true">
+    Is there any football on tonight &middot; The Goldfinch &middot; Is there any football on tonight &middot; The Goldfinch &middot;
+  </div>
+
+  <div class="footer-strip">
+    <span>Rough Studio &middot; rough.ink</span>
+    <span>Flyer #001 &middot; Printed in Scotland</span>
+  </div>
+
+</div>
+
+</body>
+</html>
