@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Goldfinch — Rough Editions</title>
+<style>
+  @font-face {
+    font-family: "FoundersGroteskXCond";
+    src: url("fonts/FoundersGroteskXCond-Bold.otf") format("opentype");
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "Sohne";
+    src: url("fonts/Sohne-Kraftig.ttf") format("truetype");
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "SohneBreit";
+    src: url("fonts/SohneBreit-Kraftig.ttf") format("truetype");
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --near-black: #272727;
+    --off-white: #EDEFE9;
+    --tangerine: #FC8143;
+    --acid-lime: #ECFEA7;
+    --chocolate: #6D422E;
+
+    --font-display: "FoundersGroteskXCond", "Impact", "Helvetica Neue Condensed", sans-serif;
+    --font-body: "Sohne", "Helvetica Neue", Arial, sans-serif;
+    --font-tag: "SohneBreit", "Sohne", "Helvetica Neue", Arial, sans-serif;
+
+    --s-4: 0.25rem; --s-8: 0.5rem; --s-12: 0.75rem;
+    --s-16: 1rem; --s-24: 1.5rem; --s-32: 2rem; --s-48: 3rem;
+    --border: 1px solid var(--near-black);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    background: var(--off-white);
+    color: var(--near-black);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: var(--s-16);
+    background: var(--off-white);
+  }
+
+  ::selection { background: var(--acid-lime); color: var(--near-black); }
+
+  .flyer {
+    width: 100%;
+    max-width: 400px;
+    background: var(--off-white);
+    border: var(--border);
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  .cover {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    border-bottom: var(--border);
+    background: var(--chocolate);
+    position: relative;
+  }
+
+  .cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background: var(--chocolate);
+  }
+
+  .cover-bird {
+    font-family: var(--font-display);
+    font-size: 8rem;
+    line-height: 0.7;
+    color: var(--acid-lime);
+    text-transform: uppercase;
+    opacity: 0.85;
+    text-align: center;
+    user-select: none;
+  }
+
+  .cover-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-family: var(--font-tag);
+    font-size: 0.5625rem;
+    text-transform: uppercase;
+    color: var(--off-white);
+    background: var(--near-black);
+    padding: var(--s-8) var(--s-12);
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+
+  .body-section {
+    padding: var(--s-24);
+    display: grid;
+    gap: var(--s-16);
+  }
+
+  .eyebrow {
+    font-family: var(--font-tag);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    line-height: 1.05;
+    border-bottom: var(--border);
+    padding-bottom: var(--s-8);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--s-8);
+  }
+
+  .eyebrow span:last-child { color: var(--chocolate); }
+
+  .hero {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 0.7;
+    text-transform: uppercase;
+    background: var(--acid-lime);
+    padding: var(--s-16);
+  }
+
+  .tagline {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1.0625rem;
+    line-height: 1.35;
+  }
+
+  .synopsis {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-left: 2px solid var(--chocolate);
+    padding-left: var(--s-12);
+  }
+
+  .specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-12);
+    padding-top: var(--s-4);
+  }
+
+  .spec-item { display: grid; gap: 0.125rem; }
+
+  .spec-label {
+    font-family: var(--font-tag);
+    font-size: 0.5625rem;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: #5A5A5A;
+  }
+
+  .spec-value {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .cta {
+    display: inline-grid;
+    place-self: start;
+    font-family: var(--font-tag);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: var(--near-black);
+    background: var(--tangerine);
+    border: var(--border);
+    padding: var(--s-8) var(--s-16);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 200ms ease, color 200ms ease;
+  }
+
+  .cta:hover,
+  .cta:focus-visible {
+    background: var(--near-black);
+    color: var(--off-white);
+  }
+
+  .cta:focus-visible {
+    outline: 2px solid var(--tangerine);
+    outline-offset: 2px;
+  }
+
+  .marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 0.7;
+    text-transform: uppercase;
+    color: var(--chocolate);
+    opacity: 0.1;
+    user-select: none;
+    pointer-events: none;
+    margin: 0 calc(-1 * var(--s-24));
+    padding: var(--s-8) 0;
+  }
+
+  .footer-strip {
+    border-top: var(--border);
+    padding-top: var(--s-12);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: flex-end;
+    gap: var(--s-12);
+  }
+
+  .footer-logos {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--s-8);
+  }
+
+  .logo-mark { height: 14px; width: auto; display: block; }
+  .wordmark { height: 12px; width: auto; display: block; }
+
+  .footer-tag {
+    font-family: var(--font-tag);
+    font-weight: 500;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: #5A5A5A;
+    text-align: right;
+  }
+
+  @media (max-width: 420px) {
+    body { padding: var(--s-8); }
+    .body-section { padding: var(--s-16); gap: var(--s-12); }
+    .hero { font-size: 2.5rem; padding: var(--s-12); }
+    .marquee { margin: 0 calc(-1 * var(--s-16)); }
+  }
+</style>
+</head>
+<body>
+
+<article class="flyer">
+
+  <div class="cover" role="img" aria-label="The Goldfinch book cover">
+    <div class="cover-placeholder">
+      <span class="cover-bird">G</span>
+    </div>
+    <span class="cover-label">Cover photograph: someone's phone, probably</span>
+  </div>
+
+  <div class="body-section">
+
+    <div class="eyebrow">
+      <span>Now in paperback</span>
+      <span>Rough Editions</span>
+    </div>
+
+    <h1 class="hero">The Goldfinch</h1>
+
+    <p class="tagline">A book about football. Probably. Nobody's entirely sure — but it's got a bird on the cover and the binding suggests sport.</p>
+
+    <p class="synopsis">Part tactical analysis, part fever dream, part hardback that looked good on the shelf of a pub you can't quite remember the name of. 800 pages. No index. The chapters on set pieces have been described — by the one person who claims to have read them — as "unexpectedly moving."</p>
+
+    <div class="specs">
+      <div class="spec-item">
+        <span class="spec-label">Format</span>
+        <span class="spec-value">Hardback, probably</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Pages</span>
+        <span class="spec-value">800+ (nobody's counted)</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Cover</span>
+        <span class="spec-value">Bird. Definitely a bird.</span>
+      </div>
+    </div>
+
+    <a href="#" class="cta">Buy the book · £14.99</a>
+
+    <div class="marquee" aria-hidden="true">
+      Is there any football on tonight · The Goldfinch · Is there any football on tonight · The Goldfinch · Is there any football on tonight · The Goldfinch ·
+    </div>
+
+    <div class="footer-strip">
+      <div class="footer-logos">
+        <img class="logo-mark" src="assets/rough-mark.svg" alt="Rough mark" onerror="this.style.display='none'">
+        <img class="wordmark" src="assets/rough-wordmark.svg" alt="Rough" onerror="this.style.display='none'">
+      </div>
+      <span class="footer-tag">Flyer #001 · Printed in Scotland</span>
+    </div>
+
+  </div>
+
+</article>
+
+</body>
+</html>
