@@ -1,447 +1,440 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Goldfinch — Rough</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23272727'/><text x='4' y='24' font-family='sans-serif' font-weight='700' font-size='22' fill='%23EDEFE9'>R</text></svg>">
-  <style>
-    /* ─── Design Tokens ─────────────────────────────────────── */
-    :root {
-      --near-black:    #272727;
-      --off-white:     #EDEFE9;
-      --tangerine:    #FC8143;
-      --acid-lime:    #ECFEA7;
-      --chocolate:    #6D422E;
-      --lilac:        #BFACF8;
-      --pink:         #F8C8D8;
-      --fg1:          #272727;
-      --fg2:          #5A5A5A;
-      --fg-inverse:   #EDEFE9;
-      --bg1:          #EDEFE9;
-      --bg2:          #E2E4DD;
-      --border:       #272727;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Goldfinch — Rough Editions</title>
+<style>
+  /* ─── Tokens ─────────────────────────────────────────── */
+  :root {
+    --nb:    #272727;
+    --ow:    #EDEFE9;
+    --tng:   #FC8143;
+    --acl:   #ECFEA7;
+    --choc:  #6D422E;
+    --lil:   #BFACF8;
+    --pink:  #F8C8D8;
+    --fg2:   rgba(39,39,39,0.55);
+  }
 
-    @font-face {
-      font-family: 'FoundersGroteskXCond';
-      src: url('fonts/FoundersGroteskXCond-Bold.otf') format('opentype');
-      font-weight: 700;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Sohne';
-      src: url('fonts/Sohne-Kraftig.ttf') format('truetype');
-      font-weight: 500;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'SohneBreit';
-      src: url('fonts/SohneBreit-Kraftig.ttf') format('truetype');
-      font-weight: 500;
-      font-style: normal;
-    }
+  /* ─── Fonts ───────────────────────────────────────────── */
+  @font-face {
+    font-family: 'FGXC';
+    src: url('https://dean-rough.github.io/rough-pages/fonts/FoundersGroteskXCond-Bold.otf') format('opentype');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Sohne';
+    src: url('https://dean-rough.github.io/rough-pages/fonts/Sohne-Kraftig.ttf') format('truetype');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'SohneBreit';
+    src: url('https://dean-rough.github.io/rough-pages/fonts/SohneBreit-Kraftig.ttf') format('truetype');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  /* ─── Reset ───────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ─── Base ──────────────────────────────────────────────── */
-    html, body {
-      background-color: var(--near-black);
-      color: var(--off-white);
-      font-family: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 500;
-      line-height: 1.5;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
+  /* ─── Page ─────────────────────────────────────────────── */
+  html, body {
+    background: var(--nb);
+    color: var(--ow);
+    font-family: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-    /* ─── Layout ────────────────────────────────────────────── */
-    .page {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: clamp(1.5rem, 4vw, 3rem);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+  /* ─── Marquee ─────────────────────────────────────────── */
+  .marquee-wrap {
+    border-top: 1px solid var(--ow);
+    border-bottom: 1px solid var(--ow);
+    overflow: hidden;
+    padding: 10px 0;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 18s linear infinite;
+    width: max-content;
+  }
+  .marquee-track span {
+    font-family: 'FGXC', Impact, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: var(--ow);
+    white-space: nowrap;
+    padding: 0 2.5rem;
+    opacity: 0.35;
+  }
+  .marquee-track span::after {
+    content: '//';
+    padding-left: 2.5rem;
+    color: var(--tng);
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
 
-    /* ─── Header Bar ───────────────────────────────────────── */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--off-white);
-      margin-bottom: 3rem;
-    }
+  /* ─── Main card ────────────────────────────────────────── */
+  .card {
+    flex: 1;
+    max-width: 480px;
+    width: 100%;
+    margin: auto;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
 
-    .logo-mark {
-      width: 32px;
-      height: 32px;
-      flex-shrink: 0;
-    }
+  /* ─── Header ──────────────────────────────────────────── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(237,239,233,0.2);
+    margin-bottom: 2.5rem;
+  }
+  .mark {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .mark-box {
+    width: 28px;
+    height: 28px;
+    background: var(--ow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mark-box svg { display: block; }
+  .mark-text {
+    font-family: 'FGXC', Impact, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: var(--ow);
+    line-height: 1;
+  }
+  .header-tag {
+    font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: rgba(237,239,233,0.4);
+  }
 
-    .tag-label {
-      font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(0.625rem, 0.8vw, 0.75rem);
-      text-transform: uppercase;
-      letter-spacing: 0;
-      color: var(--off-white);
-    }
+  /* ─── Hero block ───────────────────────────────────────── */
+  .hero {
+    margin-bottom: 2rem;
+  }
+  .hero-label {
+    font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: rgba(237,239,233,0.4);
+    margin-bottom: 0.75rem;
+  }
+  .hero-title {
+    font-family: 'FGXC', Impact, sans-serif;
+    font-weight: 700;
+    font-size: clamp(3.5rem, 18vw, 5.5rem);
+    line-height: 0.85;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: var(--ow);
+  }
 
-    /* ─── Main Split ────────────────────────────────────────── */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      flex: 1;
-      border: 1px solid var(--off-white);
-    }
+  /* ─── Cover image area ─────────────────────────────────── */
+  .cover-wrap {
+    margin-bottom: 2rem;
+    border: 1px solid rgba(237,239,233,0.2);
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    position: relative;
+  }
+  .cover-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%) contrast(1.05);
+  }
+  .cover-label {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: var(--tng);
+    color: var(--nb);
+    font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    padding: 0.3rem 0.6rem;
+  }
 
-    .hero-left {
-      padding: 3rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border-right: 1px solid var(--off-white);
-    }
+  /* ─── Tagline ──────────────────────────────────────────── */
+  .tagline {
+    margin-bottom: 1.5rem;
+  }
+  .tagline-label {
+    font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: var(--tng);
+    margin-bottom: 0.5rem;
+  }
+  .tagline-text {
+    font-family: 'FGXC', Impact, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 7vw, 2.25rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: var(--ow);
+  }
 
-    .hero-right {
-      padding: 3rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      background: var(--off-white);
-      color: var(--near-black);
-    }
+  /* ─── Synopsis ──────────────────────────────────────────── */
+  .synopsis {
+    border-left: 3px solid var(--choc);
+    padding-left: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .synopsis p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(237,239,233,0.7);
+    max-width: 40ch;
+  }
 
-    /* ─── Bird Illustration ────────────────────────────────── */
-    .bird-wrap {
-      margin-bottom: 2rem;
-    }
+  /* ─── Specs grid ────────────────────────────────────────── */
+  .specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(237,239,233,0.15);
+    border: 1px solid rgba(237,239,233,0.15);
+    margin-bottom: 2rem;
+  }
+  .spec-item {
+    background: var(--nb);
+    padding: 1rem;
+  }
+  .spec-label {
+    font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: rgba(237,239,233,0.35);
+    margin-bottom: 0.35rem;
+  }
+  .spec-value {
+    font-family: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    color: var(--ow);
+  }
 
-    .bird-wrap svg {
-      width: 100%;
-      max-width: 280px;
-      height: auto;
-      display: block;
-    }
+  /* ─── CTA ──────────────────────────────────────────────── */
+  .cta-row {
+    margin-bottom: 2rem;
+  }
+  .cta {
+    display: inline-block;
+    background: var(--tng);
+    color: var(--nb);
+    font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    text-decoration: none;
+    padding: 0.875rem 2rem;
+    border: 1px solid var(--nb);
+    cursor: pointer;
+    transition: background 180ms cubic-bezier(0.25, 0.1, 0.25, 1), color 180ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .cta:hover {
+    background: var(--nb);
+    color: var(--ow);
+  }
 
-    /* ─── Typography ────────────────────────────────────────── */
-    .title-display {
-      font-family: 'FoundersGroteskXCond', Impact, 'Helvetica Neue Condensed', sans-serif;
-      font-weight: 700;
-      font-size: clamp(4.5rem, 12vw + 1rem, 8.75rem);
-      line-height: 0.7;
-      text-transform: uppercase;
-      letter-spacing: 0;
-      color: var(--off-white);
-      margin-bottom: 2rem;
-    }
+  /* ─── Quote ────────────────────────────────────────────── */
+  .quote {
+    background: var(--acl);
+    color: var(--nb);
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+    border-left: 3px solid var(--nb);
+  }
+  .quote p {
+    font-family: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-style: italic;
+  }
 
-    .subtitle {
-      font-family: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 500;
-      font-size: clamp(1rem, 1.5vw, 1.25rem);
-      line-height: 1.3;
-      color: var(--off-white);
-      margin-bottom: 1rem;
-    }
+  /* ─── Footer ───────────────────────────────────────────── */
+  .footer {
+    border-top: 1px solid rgba(237,239,233,0.2);
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+  .footer-brand {
+    font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: rgba(237,239,233,0.35);
+  }
+  .footer-ref {
+    font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: rgba(237,239,233,0.2);
+  }
 
-    .subtitle em {
-      font-style: normal;
-      color: var(--tangerine);
-    }
-
-    .body-text {
-      font-size: clamp(0.875rem, 1vw + 0.25rem, 1rem);
-      line-height: 1.5;
-      color: var(--fg2);
-      color: rgba(237, 239, 233, 0.6);
-    }
-
-    /* ─── Spec Block (right panel) ─────────────────────────── */
-    .spec-label {
-      font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(0.625rem, 0.8vw, 0.75rem);
-      text-transform: uppercase;
-      letter-spacing: 0;
-      color: var(--fg1);
-      margin-bottom: 1rem;
-      opacity: 0.5;
-    }
-
-    .spec-headline {
-      font-family: 'FoundersGroteskXCond', Impact, 'Helvetica Neue Condensed', sans-serif;
-      font-weight: 700;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      line-height: 0.85;
-      text-transform: uppercase;
-      letter-spacing: 0;
-      color: var(--near-black);
-      margin-bottom: 2rem;
-    }
-
-    .spec-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .spec-list li {
-      display: flex;
-      align-items: baseline;
-      gap: 0.75rem;
-      font-size: clamp(0.875rem, 1vw + 0.25rem, 1rem);
-      line-height: 1.4;
-      color: var(--near-black);
-    }
-
-    .spec-list li::before {
-      content: '';
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: var(--tangerine);
-      flex-shrink: 0;
-      margin-top: 0.5em;
-    }
-
-    .spec-highlight {
-      background: var(--acid-lime);
-      padding: 0.75rem 1rem;
-      margin-bottom: 2rem;
-      border-left: 3px solid var(--near-black);
-    }
-
-    .spec-highlight p {
-      font-size: clamp(0.875rem, 1vw + 0.25rem, 1rem);
-      line-height: 1.4;
-      color: var(--near-black);
-    }
-
-    /* ─── CTA ───────────────────────────────────────────────── */
-    .cta-primary {
-      display: inline-block;
-      background: var(--tangerine);
-      color: var(--near-black);
-      font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(0.75rem, 0.8vw, 0.875rem);
-      text-transform: uppercase;
-      letter-spacing: 0;
-      text-decoration: none;
-      padding: 0.875rem 1.75rem;
-      border: none;
-      cursor: pointer;
-      transition: background 200ms cubic-bezier(0.25, 0.1, 0.25, 1);
-    }
-
-    .cta-primary:hover {
-      background: var(--off-white);
-    }
-
-    /* ─── Marquee ───────────────────────────────────────────── */
-    .marquee-bar {
-      overflow: hidden;
-      border-top: 1px solid var(--off-white);
-      border-bottom: 1px solid var(--off-white);
-      padding: 0.75rem 0;
-      margin-top: 3rem;
-    }
-
-    .marquee-track {
-      display: flex;
-      gap: 4rem;
-      animation: marquee 24s linear infinite;
-      width: max-content;
-    }
-
-    .marquee-track span {
-      font-family: 'FoundersGroteskXCond', Impact, 'Helvetica Neue Condensed', sans-serif;
-      font-weight: 700;
-      font-size: clamp(0.875rem, 1vw, 1rem);
-      text-transform: uppercase;
-      letter-spacing: 0;
-      color: var(--off-white);
-      white-space: nowrap;
-    }
-
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    /* ─── Footer Bar ───────────────────────────────────────── */
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--off-white);
-      margin-top: 2rem;
-    }
-
-    .footer-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .footer-logo {
-      font-family: 'FoundersGroteskXCond', Impact, 'Helvetica Neue Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0;
-      color: var(--off-white);
-      text-decoration: none;
-    }
-
-    .footer-tagline {
-      font-size: clamp(0.625rem, 0.8vw, 0.75rem);
-      color: rgba(237, 239, 233, 0.5);
-    }
-
-    .barcode {
-      font-family: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.625rem;
-      letter-spacing: 0.1em;
-      color: rgba(237, 239, 233, 0.4);
-      text-transform: uppercase;
-    }
-
-    /* ─── Responsive ────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-      .hero-left {
-        border-right: none;
-        border-bottom: 1px solid var(--off-white);
-      }
-      .hero-right {
-        padding-top: 2rem;
-      }
-    }
-  </style>
+  /* ─── Mobile ────────────────────────────────────────────── */
+  @media (max-width: 520px) {
+    .card { padding: 2rem 1.5rem; }
+  }
+</style>
 </head>
 <body>
 
-<div class="page">
+<!-- Marquee -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Is there any football on tonight</span>
+    <span>The Goldfinch</span>
+    <span>Donna Tartt</span>
+    <span>800 pages</span>
+    <span>No Index</span>
+    <span>Pulitzer Prize 2014</span>
+    <span>Is there any football on tonight</span>
+    <span>The Goldfinch</span>
+    <span>Donna Tartt</span>
+    <span>800 pages</span>
+    <span>No Index</span>
+    <span>Pulitzer Prize 2014</span>
+  </div>
+</div>
+
+<!-- Main card -->
+<div class="card">
 
   <!-- Header -->
   <header class="header">
-    <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="32" height="32" fill="#EDEFE9"/>
-      <text x="4" y="24" font-family="sans-serif" font-weight="700" font-size="22" fill="#272727">R</text>
-    </svg>
-    <span class="tag-label">Rough Ink — Edinburgh</span>
+    <div class="mark">
+      <div class="mark-box">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="2" y="12" font-family="sans-serif" font-weight="700" font-size="12" fill="#272727">R</text>
+        </svg>
+      </div>
+      <span class="mark-text">Rough Editions</span>
+    </div>
+    <span class="header-tag">Edinburgh &middot; Est. 2019</span>
   </header>
 
-  <!-- Hero Grid -->
-  <main class="hero">
+  <!-- Hero -->
+  <div class="hero">
+    <p class="hero-label">A novel by Donna Tartt &mdash; Rough Editions</p>
+    <h1 class="hero-title">The<br>Goldfinch</h1>
+  </div>
 
-    <!-- Left: Title + Bird + Body -->
-    <div class="hero-left">
+  <!-- Cover -->
+  <div class="cover-wrap">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/The_Goldfinch_%28novel%29.jpg/400px-The_Goldfinch_%28novel%29.jpg"
+      alt="The Goldfinch by Donna Tartt"
+      onerror="this.style.display='none'"
+    />
+    <span class="cover-label">Hardback &middot; &pound;14.99</span>
+  </div>
 
-      <div>
-        <!-- Goldfinch SVG illustration -->
-        <div class="bird-wrap">
-          <svg viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Branch -->
-            <line x1="20" y1="140" x2="220" y2="120" stroke="#EDEFE9" stroke-width="3" stroke-linecap="round"/>
-            <line x1="60" y1="145" x2="80" y2="130" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round"/>
-            <line x1="160" y1="128" x2="175" y2="118" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round"/>
-            <!-- Bird body -->
-            <ellipse cx="120" cy="90" rx="42" ry="30" fill="#FC8143"/>
-            <!-- Wing -->
-            <ellipse cx="108" cy="85" rx="28" ry="18" fill="#6D422E"/>
-            <!-- Tail -->
-            <path d="M158 95 L190 80 L188 100 Z" fill="#6D422E"/>
-            <!-- Head -->
-            <circle cx="150" cy="72" r="18" fill="#FC8143"/>
-            <!-- Gold circle (trait signature) -->
-            <circle cx="150" cy="72" r="10" fill="#ECFEA7"/>
-            <circle cx="150" cy="72" r="6" fill="#FC8143"/>
-            <!-- Eye -->
-            <circle cx="156" cy="68" r="3" fill="#272727"/>
-            <!-- Beak -->
-            <path d="M166 72 L185 70 L166 76 Z" fill="#ECFEA7"/>
-            <!-- Legs -->
-            <line x1="115" y1="118" x2="112" y2="138" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round"/>
-            <line x1="130" y1="116" x2="133" y2="136" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round"/>
-            <!-- Feet -->
-            <path d="M108 138 L112 138 L112 142" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <path d="M129 136 L133 136 L133 140" stroke="#EDEFE9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </svg>
-        </div>
+  <!-- Tagline -->
+  <div class="tagline">
+    <p class="tagline-label">The running question</p>
+    <p class="tagline-text">Is there any football on tonight?</p>
+  </div>
 
-        <h1 class="title-display">The<br>Goldfinch</h1>
+  <!-- Synopsis -->
+  <div class="synopsis">
+    <p>Part tactical analysis, part fever dream, part hardback that looked good on the shelf of a pub you can't quite remember the name of. Nobody's quite sure what it's about. But it's got a bird on the cover and the binding suggests sport.</p>
+  </div>
 
-        <p class="subtitle">
-          A novel about <em>football</em>.<br>
-          Probably.
-        </p>
-
-        <p class="body-text">
-          800 pages. One small bird. A bomb in a museum.<br>
-          Not a single person has finished it.
-        </p>
-      </div>
-
-      <div>
-        <div class="marquee-bar" aria-hidden="true">
-          <div class="marquee-track">
-            <span>The Goldfinch &nbsp;&nbsp;—&nbsp;&nbsp; Donna Tartt &nbsp;&nbsp;—&nbsp;&nbsp; Pulitzer Prize Winner &nbsp;&nbsp;—&nbsp;&nbsp; 800 Pages &nbsp;&nbsp;—&nbsp;&nbsp; No Index &nbsp;&nbsp;—&nbsp;&nbsp; The Goldfinch &nbsp;&nbsp;—&nbsp;&nbsp; Donna Tartt &nbsp;&nbsp;—&nbsp;&nbsp; Pulitzer Prize Winner &nbsp;&nbsp;—&nbsp;&nbsp; 800 Pages &nbsp;&nbsp;—&nbsp;&nbsp; No Index &nbsp;&nbsp;—&nbsp;&nbsp;</span>
-          </div>
-        </div>
-      </div>
-
+  <!-- Specs -->
+  <div class="specs">
+    <div class="spec-item">
+      <p class="spec-label">Format</p>
+      <p class="spec-value">Hardback, 800pp</p>
     </div>
-
-    <!-- Right: Spec / Details -->
-    <div class="hero-right">
-
-      <p class="spec-label">About the book</p>
-
-      <h2 class="spec-headline">One Boy.<br>One Bird.<br>One Bomb.</h2>
-
-      <ul class="spec-list">
-        <li>800 pages of life-affirming prose</li>
-        <li>The friend you'll never finish</li>
-        <li>Pulitzer Prize for Fiction, 2014</li>
-        <li>Carel Fabritius's goldfinch on the cover — the actual painting is in the Mauritshuis, The Hague</li>
-        <li>Contains more plot than strictly necessary</li>
-      </ul>
-
-      <div class="spec-highlight">
-        <p>The perfect gift for someone who already owns it.</p>
-      </div>
-
-      <a href="#" class="cta-primary">Buy Now — £28</a>
-
+    <div class="spec-item">
+      <p class="spec-label">Index</p>
+      <p class="spec-value">No Index</p>
     </div>
+    <div class="spec-item">
+      <p class="spec-label">Cover art</p>
+      <p class="spec-value">Carel Fabritius, 1654</p>
+    </div>
+    <div class="spec-item">
+      <p class="spec-label">The question</p>
+      <p class="spec-value">Is there any football on tonight?</p>
+    </div>
+  </div>
 
-  </main>
+  <!-- CTA -->
+  <div class="cta-row">
+    <a href="#" class="cta">Buy the book</a>
+  </div>
+
+  <!-- Quote -->
+  <div class="quote">
+    <p>The perfect gift for someone who already owns it.</p>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="footer-left">
-      <a href="#" class="footer-logo">Rough</a>
-      <span class="footer-tagline">Interior Design — Edinburgh</span>
-    </div>
-    <span class="barcode">ISBN 978-0-316-22519-5</span>
+    <span class="footer-brand">Rough &middot; Edinburgh &middot; rough.ink</span>
+    <span class="footer-ref">ISBN 978-0-316-22519-5</span>
   </footer>
 
+</div>
+
+<!-- Marquee bottom -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Is there any football on tonight</span>
+    <span>The Goldfinch</span>
+    <span>Donna Tartt</span>
+    <span>800 pages</span>
+    <span>No Index</span>
+    <span>Pulitzer Prize 2014</span>
+    <span>Is there any football on tonight</span>
+    <span>The Goldfinch</span>
+    <span>Donna Tartt</span>
+    <span>800 pages</span>
+    <span>No Index</span>
+    <span>Pulitzer Prize 2014</span>
+  </div>
 </div>
 
 </body>
