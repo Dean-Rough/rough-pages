@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Driftwood — Mood Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+<style>
+/* ================= @font-face ================= */
+@font-face { font-family: 'FoundersGroteskXCond'; src: url('fonts/FoundersGroteskXCond-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Sohne'; src: url('fonts/Sohne-Kraftig.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'SohneBreit'; src: url('fonts/SohneBreit-Kraftig.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+
+/* ================= No-JS fallback ================= */
+noscript style{display:none}
+</style>
+<noscript><style>[data-reveal],[data-reveal-fade],[data-stagger],[data-stagger] > *{opacity:1!important;transform:none!important}</style></noscript>
+<style>
+
+/* ================= Rough Design Tokens ================= */
+:root {
+  --near-black: #272727;
+  --off-white: #EDEFE9;
+  --tangerine: #FC8143;
+  --acid-lime: #ECFEA7;
+  --chocolate: #6D422E;
+  --lilac: #BFACF8;
+  --pink: #F8C8D8;
+  --bg2: #E2E4DD;
+  --fg2: #5A5A5A;
+
+  --font-display: 'FoundersGroteskXCond', 'Impact', 'Helvetica Neue Condensed', sans-serif;
+  --font-body: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+  --font-tag: 'SohneBreit', 'Helvetica Neue', Arial, sans-serif;
+  --font-editorial: 'Cormorant Garamond', 'Times New Roman', serif;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --space-8px: 0.5rem;
+}
+
+/* ================= Reset ================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);font-weight:500;color:var(--near-black);background:var(--off-white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ================= Page Navigation ================= */
+.page-nav{position:fixed;right:clamp(1rem, 4vw, 3rem);top:50%;transform:translateY(-50%);z-index:1000;display:flex;flex-direction:column;gap:12px}
+.page-dot{width:8px;height:8px;border-radius:50%;background:var(--near-black);opacity:0.25;transition:opacity var(--ease-quart) 0.4s,transform var(--ease-quart) 0.4s;cursor:pointer;border:none;padding:0}
+.page-dot.active{opacity:1;transform:scale(1.5)}
+.page-dot:hover{opacity:0.6}
+.page-label{position:absolute;right:20px;top:50%;transform:translateY(-50%);font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.05em;opacity:0;transition:opacity var(--ease-quart) 0.3s;white-space:nowrap;pointer-events:none}
+.page-dot:hover+.page-label{opacity:0.6}
+
+/* ================= Page Wrapper ================= */
+.page{width:100%;min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:clamp(2rem, 6vw, 6rem) clamp(1rem, 4vw, 4rem)}
+.page--dark{background:var(--near-black);color:var(--off-white)}
+
+/* ================= Page 01: Hero ================= */
+.page-hero{align-items:flex-start;padding-top:20vh}
+.project-tag{font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--tangerine);margin-bottom:var(--space-8px)}
+.hero-wordmark{font-family:var(--font-display);font-size:clamp(4rem, 14vw, 11rem);line-height:0.7;text-transform:uppercase;letter-spacing:-0.025em;margin-bottom:clamp(1rem, 2vw, 2rem)}
+.hero-divider{width:clamp(3rem, 8vw, 6rem);height:2px;background:var(--near-black);margin-bottom:clamp(1rem, 2vw, 2rem)}
+.hero-sub{font-family:var(--font-body);font-size:clamp(0.875rem, 1.2vw, 1.125rem);color:var(--fg2);max-width:36ch;line-height:1.5}
+.hero-meta{position:absolute;bottom:clamp(1rem, 3vw, 3rem);left:clamp(1rem, 4vw, 4rem);display:flex;gap:2rem;font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--fg2)}
+.hero-meta span{display:flex;align-items:center;gap:0.375rem}
+.hero-meta span::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--tangerine);display:inline-block}
+
+/* ================= Page 02: The Brief ================= */
+.page-brief{background:var(--bg2)}
+.brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem, 6vw, 5rem);max-width:1100px;width:100%;margin:0 auto}
+.brief-label{font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--tangerine);margin-bottom:0.5rem}
+.brief-title{font-family:var(--font-display);font-size:clamp(2.5rem, 5vw, 4rem);line-height:0.75;text-transform:uppercase;margin-bottom:clamp(1rem, 2vw, 2rem)}
+.brief-quote{font-family:var(--font-editorial);font-size:clamp(1.25rem, 2vw, 1.75rem);font-style:italic;line-height:1.4;color:var(--fg2);margin-bottom:1.5rem}
+.brief-pillars{display:flex;flex-direction:column;gap:1.5rem}
+.brief-pillar{border-left:2px solid var(--tangerine);padding-left:1rem}
+.brief-pillar-heading{font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.375rem}
+.brief-pillar-text{font-family:var(--font-body);font-size:0.875rem;line-height:1.5;color:var(--fg2)}
+
+/* ================= Page 03-04: The Rooms ================= */
+.room-header{font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--tangerine);margin-bottom:0.5rem}
+.room-title{font-family:var(--font-display);font-size:clamp(2.5rem, 6vw, 5rem);line-height:0.75;text-transform:uppercase;margin-bottom:clamp(1rem, 2vw, 2rem)}
+.room-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem, 4vw, 3rem);max-width:1100px;width:100%;margin:0 auto}
+.room-image{width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--fg2);border:1px dashed var(--fg2)}
+.room-image--dark{background:var(--near-black);color:var(--off-white);border-color:var(--chocolate)}
+.room-swatches{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1.5rem}
+.swatch{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.05em}
+.swatch-dot{width:1.5rem;height:1.5rem;border-radius:50%;border:1px solid var(--near-black);flex-shrink:0}
+.room-note{font-family:var(--font-editorial);font-size:1rem;font-style:italic;line-height:1.5;color:var(--fg2);margin-top:1.5rem;max-width:42ch}
+
+/* ================= Page 05: The Brand ================= */
+.brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem, 5vw, 4rem);max-width:1100px;width:100%;margin:0 auto}
+.brand-option{display:flex;flex-direction:column;gap:1rem}
+.brand-wordmark{font-family:var(--font-display);font-size:clamp(1.75rem, 3.5vw, 2.75rem);line-height:0.8;text-transform:uppercase;padding-bottom:0.75rem;border-bottom:1px solid var(--near-black)}
+.brand-wordmark--alt{font-family:var(--font-editorial);font-size:clamp(2rem, 4vw, 3rem);font-style:italic;text-transform:none;font-weight:600}
+.brand-rationale{font-family:var(--font-body);font-size:0.8rem;line-height:1.5;color:var(--fg2)}
+.brand-signage{width:100%;aspect-ratio:16/9;background:var(--near-black);display:flex;align-items:center;justify-content:center;margin-top:1.5rem;border:1px dashed var(--chocolate)}
+.brand-signage span{font-family:var(--font-display);font-size:clamp(1.5rem, 3vw, 2.5rem);color:var(--off-white);text-transform:uppercase;letter-spacing:-0.02em}
+
+/* ================= Page 06: Materials ================= */
+.materials-layout{max-width:1100px;width:100%;margin:0 auto}
+.materials-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:clamp(1rem, 2vw, 1.5rem);margin-bottom:2rem}
+.material-card{border:1px solid var(--near-black);padding:1rem;display:flex;flex-direction:column;gap:0.75rem}
+.material-swatch{width:100%;aspect-ratio:3/2}
+.material-name{font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.05em}
+.material-code{font-family:var(--font-body);font-size:0.75rem;color:var(--fg2)}
+.material-note{font-family:var(--font-editorial);font-size:0.875rem;font-style:italic;line-height:1.4;color:var(--fg2)}
+
+/* ================= Page 07: Spatial Move ================= */
+.spatial-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(2rem, 4vw, 3rem);max-width:1100px;width:100%;margin:0 auto;align-items:center}
+.spatial-diagram{width:100%;aspect-ratio:1/1;background:var(--bg2);border:1px solid var(--near-black);display:flex;align-items:center;justify-content:center;font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--fg2)}
+.spatial-notes{display:flex;flex-direction:column;gap:1.5rem}
+.spatial-item{border-left:2px solid var(--tangerine);padding-left:1rem}
+.spatial-item-heading{font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.25rem}
+.spatial-item-text{font-family:var(--font-body);font-size:0.8rem;line-height:1.5;color:var(--fg2)}
+
+/* ================= Footer ================= */
+.page-footer{padding:clamp(1rem, 3vw, 3rem) clamp(1rem, 4vw, 4rem);display:flex;justify-content:space-between;align-items:center;font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--fg2);border-top:1px solid var(--fg2);position:relative;background:var(--off-white)}
+.footer-wordmark{font-family:var(--font-display);font-size:1rem;color:var(--near-black)}
+
+/* ================= Animations ================= */
+[data-reveal]{opacity:0;transform:translateY(30px);transition:opacity 0.9s var(--ease-expo),transform 0.9s var(--ease-expo)}
+[data-reveal].visible{opacity:1;transform:translateY(0)}
+[data-reveal-delay="1"]{transition-delay:0.1s}
+[data-reveal-delay="2"]{transition-delay:0.2s}
+[data-reveal-delay="3"]{transition-delay:0.3s}
+[data-reveal-delay="4"]{transition-delay:0.4s}
+[data-reveal-delay="5"]{transition-delay:0.5s}
+[data-reveal-delay="6"]{transition-delay:0.6s}
+
+[data-reveal-fade]{opacity:0;transition:opacity 1s var(--ease-quart)}
+[data-reveal-fade].visible{opacity:1}
+[data-reveal-fade-delay="1"]{transition-delay:0.3s}
+[data-reveal-fade-delay="2"]{transition-delay:0.6s}
+
+[data-stagger] > * {opacity:0;transform:translateY(20px);transition:opacity 0.6s var(--ease-expo),transform 0.6s var(--ease-expo)}
+[data-stagger].visible > *:nth-child(1){transition-delay:0s}
+[data-stagger].visible > *:nth-child(2){transition-delay:0.1s}
+[data-stagger].visible > *:nth-child(3){transition-delay:0.2s}
+[data-stagger].visible > *:nth-child(4){transition-delay:0.3s}
+[data-stagger].visible > *:nth-child(5){transition-delay:0.4s}
+[data-stagger].visible > *:nth-child(6){transition-delay:0.5s}
+[data-stagger].visible > *{opacity:1;transform:translateY(0)}
+
+::selection{background:var(--acid-lime);color:var(--near-black)}
+::-moz-selection{background:var(--acid-lime);color:var(--near-black)}
+
+@media (max-width: 768px) {
+  .brief-grid,.room-grid,.brand-grid,.spatial-grid{grid-template-columns:1fr}
+  .materials-grid{grid-template-columns:repeat(2,1fr)}
+  .page-nav{display:none}
+  .hero-meta{position:relative;left:auto;bottom:auto;margin-top:2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- Page Navigation -->
+<nav class="page-nav">
+  <a href="#hero" class="page-dot active"></a><span class="page-label">Hero</span>
+  <a href="#brief" class="page-dot"></a><span class="page-label">Brief</span>
+  <a href="#room1" class="page-dot"></a><span class="page-label">The Snug</span>
+  <a href="#room2" class="page-dot"></a><span class="page-label">The Bar</span>
+  <a href="#brand" class="page-dot"></a><span class="page-label">Brand</span>
+  <a href="#materials" class="page-dot"></a><span class="page-label">Materials</span>
+  <a href="#spatial" class="page-dot"></a><span class="page-label">Spatial</span>
+</nav>
+
+<!-- ===== Page 01: Hero ===== -->
+<section class="page page-hero" id="hero">
+  <div class="project-tag" data-reveal>5049 — Star Pubs & Bars — Glasgow</div>
+  <h1 class="hero-wordmark" data-reveal data-reveal-delay="1">Driftwood</h1>
+  <div class="hero-divider" data-reveal data-reveal-delay="2"></div>
+  <p class="hero-sub" data-reveal data-reveal-delay="3">A weathered Glasgow pub reimagined. Dark timber, warm leather, and the quiet confidence of a room that's been earning its keep for a century.</p>
+  <div class="hero-meta" data-reveal-fade data-reveal-fade-delay="2">
+    <span>Interior Design</span>
+    <span>Brand Identity</span>
+    <span>Concept Stage</span>
+  </div>
+</section>
+
+<!-- ===== Page 02: The Brief ===== -->
+<section class="page page-brief page--dark" id="brief">
+  <div class="brief-grid">
+    <div>
+      <div class="brief-label" data-reveal>The Soul of the Site</div>
+      <div class="brief-title" data-reveal data-reveal-delay="1">The<br>Brief</div>
+      <p class="brief-quote" data-reveal data-reveal-delay="2">"A room you'd choose for two hours, not two pints."</p>
+    </div>
+    <div class="brief-pillars" data-stagger>
+      <div class="brief-pillar">
+        <div class="brief-pillar-heading">Site Function</div>
+        <p class="brief-pillar-text">Community local with food ambition. Daytime trade through evening — coffee to cocktails, soup to steak pie.</p>
+      </div>
+      <div class="brief-pillar">
+        <div class="brief-pillar-heading">Aesthetic Anchor</div>
+        <p class="brief-pillar-text">Weathered and warm. Nothing shiny, nothing new-looking. Driftwood as metaphor — shaped by time, solid at the core.</p>
+      </div>
+      <div class="brief-pillar">
+        <div class="brief-pillar-heading">Retention Strategy</div>
+        <p class="brief-pillar-text">The chair test. Every seat must feel like the best seat in the house. Leather you sink into. Corners you claim.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Page 03: The Snug ===== -->
+<section class="page" id="room1">
+  <div class="room-header" data-reveal>The Room</div>
+  <div class="room-title" data-reveal data-reveal-delay="1">The Snug</div>
+  <div class="room-grid" style="margin-top:clamp(1rem,3vw,2rem)">
+    <div>
+      <div class="room-image" data-reveal data-reveal-delay="2">Snug — Reference Imagery</div>
+      <div class="room-swatches" data-reveal data-reveal-delay="3">
+        <div class="swatch"><span class="swatch-dot" style="background:#2C2C2C"></span> Railings</div>
+        <div class="swatch"><span class="swatch-dot" style="background:#8B7355"></span> London Stone</div>
+        <div class="swatch"><span class="swatch-dot" style="background:#6D422E"></span> Chocolate</div>
+      </div>
+    </div>
+    <div>
+      <div class="room-image room-image--dark" data-reveal data-reveal-delay="2">Snug — Detail</div>
+      <p class="room-note" data-reveal data-reveal-delay="3">Farrow & Ball Railings on the walls, London Stone on woodwork. A dark, close room — six tables, a fireplace, the kind of lighting that makes everyone look interesting.</p>
+      <p style="font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.05em;margin-top:1.5rem;color:var(--fg2)" data-reveal data-reveal-delay="4">Lighting: Pooky wall sconces, warm filament</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Page 04: The Bar ===== -->
+<section class="page page--dark" id="room2">
+  <div class="room-header" data-reveal>The Room</div>
+  <div class="room-title" data-reveal data-reveal-delay="1">The Bar</div>
+  <div class="room-grid" style="margin-top:clamp(1rem,3vw,2rem)">
+    <div>
+      <div class="room-image room-image--dark" data-reveal data-reveal-delay="2">Bar — Reference Imagery</div>
+      <div class="room-swatches" data-reveal data-reveal-delay="3">
+        <div class="swatch"><span class="swatch-dot" style="background:#4B5E4F"></span> Green Smoke</div>
+        <div class="swatch"><span class="swatch-dot" style="background:#D4C5A9"></span> Shaded White</div>
+        <div class="swatch"><span class="swatch-dot" style="background:#272727"></span> Off-Black</div>
+      </div>
+    </div>
+    <div>
+      <div class="room-image" data-reveal data-reveal-delay="2">Bar — Detail</div>
+      <p class="room-note" data-reveal data-reveal-delay="3" style="color:var(--bg2)">Farrow & Ball Green Smoke on the bar front. A zinc top, worn brass footrail, and back-bar shelving that glows amber. The room where the pub announces itself.</p>
+      <p style="font-family:var(--font-tag);font-size:0.625rem;text-transform:uppercase;letter-spacing:0.05em;margin-top:1.5rem;color:var(--chocolate)" data-reveal data-reveal-delay="4">Lighting: Large industrial pendant, prismatic glass</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Page 05: The Brand ===== -->
+<section class="page" id="brand">
+  <div class="room-header" data-reveal>Identity</div>
+  <div class="room-title" data-reveal data-reveal-delay="1">The Brand</div>
+  <div class="brand-grid" style="margin-top:clamp(1rem,3vw,2rem)">
+    <div class="brand-option" data-stagger>
+      <div class="brand-wordmark">Driftwood</div>
+      <p class="brand-rationale">Primary. Founders Grotesk X-Condensed. Direct, unadorned, confident. The word itself carries the aesthetic — time-worn, shaped by elements, solid.</p>
+      <div class="brand-wordmark--alt">Driftwood</div>
+      <p class="brand-rationale">Secondary mark. Cormorant Garamond italic. For editorial applications, menus, and moments that need warmth. Pairs the weight of the name with a lighter touch.</p>
+    </div>
+    <div>
+      <div class="brand-signage" data-reveal data-reveal-delay="2">
+        <span>Driftwood</span>
+      </div>
+      <p class="room-note" style="margin-top:1rem" data-reveal data-reveal-delay="3">Gilded window signage on a dark shopfront. No gimmick, no illustration — just the word, confident and permanent. Black gloss timber, gold leaf lettering, warm internal glow behind frosted glass.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Page 06: Materials ===== -->
+<section class="page page--dark" id="materials">
+  <div class="room-header" data-reveal>Colour & Texture</div>
+  <div class="room-title" data-reveal data-reveal-delay="1">Materials</div>
+  <div class="materials-layout" style="margin-top:clamp(1rem,3vw,2rem)">
+    <div class="materials-grid" data-stagger>
+      <div class="material-card">
+        <div class="material-swatch" style="background:#2C2C2C"></div>
+        <div class="material-name">Railings</div>
+        <div class="material-code">Farrow & Ball №31</div>
+        <div class="material-note">Soft black. More interesting than pure black — blue undertones emerge in daylight.</div>
+      </div>
+      <div class="material-card">
+        <div class="material-swatch" style="background:#4B5E4F"></div>
+        <div class="material-name">Green Smoke</div>
+        <div class="material-code">Farrow & Ball №47</div>
+        <div class="material-note">Deep, muted green-grey. The colour of old institutions done properly.</div>
+      </div>
+      <div class="material-card">
+        <div class="material-swatch" style="background:#6D422E"></div>
+        <div class="material-name">Caramel Leather</div>
+        <div class="material-code">Upholstery</div>
+        <div class="material-note">Warm, worn-in. Banquette seating that improves with age.</div>
+      </div>
+      <div class="material-card">
+        <div class="material-swatch" style="background:#D4C5A9"></div>
+        <div class="material-name">Shaded White</div>
+        <div class="material-code">Farrow & Ball №201</div>
+        <div class="material-note">Warm neutral for ceilings and light relief. Never clinical.</div>
+      </div>
+      <div class="material-card">
+        <div class="material-swatch" style="background:#3C2415"></div>
+        <div class="material-name">Dark-Stained Timber</div>
+        <div class="material-code">Reclaimed Oak</div>
+        <div class="material-note">Bar top and panelling. Distressed, sealed, workmanlike.</div>
+      </div>
+      <div class="material-card">
+        <div class="material-swatch" style="background:#8B7355"></div>
+        <div class="material-name">London Stone</div>
+        <div class="material-code">Farrow & Ball №6</div>
+        <div class="material-note">Warm mid-brown. Woodwork, dado rails, period-appropriate warmth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Page 07: Spatial Move ===== -->
+<section class="page" id="spatial">
+  <div class="room-header" data-reveal>Layout</div>
+  <div class="room-title" data-reveal data-reveal-delay="1">Spatial Move</div>
+  <div class="spatial-grid" style="margin-top:clamp(1rem,3vw,2rem)">
+    <div class="spatial-diagram" data-reveal data-reveal-delay="2">
+      Floorplan — Insert from 'driftwood floorplan.PDF'
+    </div>
+    <div class="spatial-notes" data-stagger>
+      <div class="spatial-item">
+        <div class="spatial-item-heading">Entry & First Impression</div>
+        <p class="spatial-item-text">Street door opens into the bar. Line of sight to the back bar and through to The Snug. First three seconds: dark, warm, serious.</p>
+      </div>
+      <div class="spatial-item">
+        <div class="spatial-item-heading">Zones</div>
+        <p class="spatial-item-text">Bar (loud end), The Snug (quiet end), dining nook (mid-room, booth seating). Natural flow from drinking to eating without a hard divide.</p>
+      </div>
+      <div class="spatial-item">
+        <div class="spatial-item-heading">Structural Intent</div>
+        <p class="spatial-item-text">Remove false ceiling in bar to expose original height. Open up snug-breezeway for visual connection. Retain all original cornice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="page-footer" data-reveal-fade>
+  <span class="footer-wordmark">ROUGH</span>
+  <span>Driftwood · 5049 · Concept Stage · May 2026</span>
+  <span>rough.ink</span>
+</footer>
+
+<!-- ================= Scroll Reveal Observer ================= -->
+<script>
+(function(){
+  var els=document.querySelectorAll('[data-reveal],[data-reveal-fade],[data-stagger]');
+  if(!els.length)return;
+
+  // Immediately reveal anything already in viewport on load
+  var vh=window.innerHeight;
+  els.forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if(r.top < vh && r.bottom > 0){el.classList.add('visible')}
+  });
+
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})
+  },{threshold:0.1});
+  els.forEach(function(el){observer.observe(el)});
+
+  // Safety: if nothing is visible after 2s, show everything
+  setTimeout(function(){
+    var any=document.querySelector('.visible');
+    if(!any){els.forEach(function(el){el.classList.add('visible')})}
+  },2000);
+
+  // Dot navigation
+  var dots=document.querySelectorAll('.page-dot');
+  var sections=document.querySelectorAll('.page[id]');
+  var dotObserver=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        dots.forEach(function(d){d.classList.remove('active')});
+        var activeDot=document.querySelector('a[href="#'+e.target.id+'"]');
+        if(activeDot)activeDot.classList.add('active')
+      }
+    })
+  },{threshold:0.4});
+  sections.forEach(function(s){dotObserver.observe(s)});
+})();
+</script>
+
+</body>
+</html>
