@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Driftwood — Project Brief | Rough</title>
+<style>
+/* ============================================================
+   ROUGH — Driftwood Brief
+   ============================================================ */
+
+@font-face {
+  font-family: 'FoundersGroteskXCond';
+  src: url('fonts/FoundersGroteskXCond-Bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Sohne';
+  src: url('fonts/Sohne-Kraftig.ttf') format('truetype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'SohneBreit';
+  src: url('fonts/SohneBreit-Kraftig.ttf') format('truetype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+:root {
+  --near-black: #272727;
+  --off-white: #EDEFE9;
+  --chocolate: #6D422E;
+  --tangerine: #FC8143;
+  --acid-lime: #ECFEA7;
+
+  --fg1: var(--near-black);
+  --fg2: #5A5A5A;
+  --bg1: var(--off-white);
+  --bg2: #E2E4DD;
+  --border: var(--near-black);
+
+  --font-display: 'FoundersGroteskXCond', 'Impact', 'Helvetica Neue Condensed', sans-serif;
+  --font-body: 'Sohne', 'Söhne', 'Helvetica Neue', Arial, sans-serif;
+  --font-tag: 'SohneBreit', 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+
+  --letter-spacing: 0;
+  --line-height: 1.05;
+  --line-height-display: 0.7;
+  --line-height-read: 1.5;
+
+  --type-mega: clamp(5.5rem, 24vw, 22rem);
+  --type-display: clamp(3.5rem, 9vw, 7.5rem);
+  --type-h2: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
+  --type-h3: clamp(1.125rem, 2vw, 1.5rem);
+  --type-body: clamp(0.9rem, 0.95vw + 0.25rem, 1.0625rem);
+  --type-caption: clamp(0.625rem, 0.78vw, 0.75rem);
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.5rem; --space-6: 2rem;
+  --space-7: 3rem; --space-8: 4rem; --space-9: 6rem;
+  --space-10: 8rem;
+
+  --page-margin: clamp(1rem, 4vw, 3rem);
+  --rule: 1px solid var(--near-black);
+  --rule-light: 1px solid rgba(39, 39, 39, 0.18);
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 360ms;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--type-body);
+  line-height: var(--line-height);
+  letter-spacing: 0;
+  color: var(--fg1);
+  background: var(--bg1);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+p { line-height: var(--line-height-read); max-width: 62ch; }
+
+a { color: var(--near-black); text-decoration: none; transition: color var(--duration) var(--ease-expo); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+a:hover { color: var(--tangerine); }
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: var(--line-height-display);
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.tag {
+  font-family: var(--font-tag);
+  font-weight: 500;
+  font-size: var(--type-caption);
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.lede {
+  font-family: var(--font-body);
+  font-size: clamp(1.125rem, 1.4vw + 0.5rem, 1.625rem);
+  line-height: 1.35;
+  max-width: 32ch;
+}
+
+/* ===== PAGE FRAME ===== */
+.page {
+  padding: var(--space-5) var(--page-margin) 0;
+}
+
+/* ===== TOP METABAR ===== */
+.metabar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: baseline;
+  padding-bottom: var(--space-4);
+  border-bottom: var(--rule);
+  gap: var(--space-5);
+}
+.metabar .left  { justify-self: start; }
+.metabar .mid   { justify-self: center; letter-spacing: 0; }
+.metabar .right { justify-self: end; text-align: right; }
+.metabar .pipe  { display: inline-block; padding: 0 var(--space-2); opacity: 0.4; }
+
+/* ===== HERO ===== */
+.hero {
+  padding: var(--space-8) 0 var(--space-7);
+  border-bottom: var(--rule);
+  position: relative;
+}
+.hero-eyebrow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+.hero-eyebrow .right { justify-self: end; text-align: right; }
+.hero-mega {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-mega);
+  line-height: 0.78;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  /* allow optical bleed to edges */
+  margin-left: -0.04em;
+}
+.hero-sub {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  align-items: end;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: var(--rule-light);
+}
+.hero-sub .right { justify-self: end; text-align: right; }
+.hero-sub .descriptor {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.4vw, 3rem);
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+.hero-sub .descriptor span { color: var(--tangerine); }
+
+/* ===== SECTION SCAFFOLDING ===== */
+section {
+  padding: var(--space-9) 0;
+  border-bottom: var(--rule);
+}
+.section-head {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-7);
+  align-items: start;
+}
+.section-num {
+  font-family: var(--font-tag);
+  font-size: var(--type-caption);
+  text-transform: uppercase;
+  padding-top: 0.4em;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--type-display);
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+.section-title em { font-style: normal; color: var(--tangerine); }
+
+/* ===== POSITIONING (ID CARD) ===== */
+.id-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-9);
+  align-items: start;
+}
+.id-statement {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4.8vw, 4.25rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+.id-statement .accent { color: var(--tangerine); }
+.id-card {
+  border-top: var(--rule);
+}
+.id-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: var(--rule-light);
+  align-items: baseline;
+}
+.id-row .k { font-family: var(--font-tag); font-size: var(--type-caption); text-transform: uppercase; }
+.id-row .v { font-family: var(--font-body); font-size: clamp(0.95rem, 1vw + 0.2rem, 1.0625rem); }
+.id-row .v.strong { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.125rem, 1.8vw, 1.5rem); text-transform: uppercase; line-height: 0.9; }
+
+/* ===== CONCEPT ===== */
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-9);
+}
+.pull-quote {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4.5vw, 3.75rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.pull-quote .lime {
+  background: var(--acid-lime);
+  padding: 0 0.12em;
+  display: inline-block;
+}
+.body-stack > p + p { margin-top: var(--space-4); }
+.body-stack p .hl { background: var(--acid-lime); padding: 0 0.18em; }
+
+/* ===== AESTHETIC DIRECTION ===== */
+.aesthetic {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+.cross {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.75rem, 7vw, 6rem);
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+.cross .x { color: var(--tangerine); padding: 0 0.05em; }
+.cross small {
+  display: block;
+  font-family: var(--font-tag);
+  font-size: var(--type-caption);
+  text-transform: uppercase;
+  margin-top: var(--space-4);
+  letter-spacing: 0;
+}
+
+.notes {
+  border-top: var(--rule);
+}
+.note-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: var(--rule-light);
+}
+.note-row .num { font-family: var(--font-tag); font-size: var(--type-caption); text-transform: uppercase; padding-top: 0.25em; }
+
+/* ===== PALETTE STRIP ===== */
+.palette {
+  margin-top: var(--space-8);
+  border-top: var(--rule);
+  border-bottom: var(--rule);
+}
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.swatch {
+  aspect-ratio: 1 / 1.15;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: var(--rule);
+}
+.swatch:last-child { border-right: none; }
+.swatch .hex { font-family: var(--font-tag); font-size: var(--type-caption); text-transform: uppercase; }
+.swatch .name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+.swatch.s-teal     { background: #1F3A3D; color: var(--off-white); }
+.swatch.s-green    { background: #2C3A2A; color: var(--off-white); }
+.swatch.s-black    { background: var(--near-black); color: var(--off-white); }
+.swatch.s-choc     { background: var(--chocolate); color: var(--off-white); }
+.swatch.s-tang     { background: var(--tangerine); color: var(--near-black); }
+
+.palette-caption {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: var(--space-4) 0;
+  gap: var(--space-5);
+}
+.palette-caption .right { justify-self: end; text-align: right; }
+
+/* ===== BUDGET / BOX CLEVER ===== */
+.boxclever-head {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(4rem, 14vw, 12rem);
+  line-height: 0.78;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+.boxclever-head em { font-style: normal; color: var(--tangerine); }
+.budget-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: var(--space-7);
+  border-top: var(--rule);
+}
+.budget-cell {
+  padding: var(--space-6) var(--space-5) var(--space-6) 0;
+  border-right: var(--rule-light);
+  border-bottom: var(--rule-light);
+}
+.budget-cell:nth-child(3n) { border-right: none; padding-right: 0; }
+.budget-cell .num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 0.85;
+  color: var(--tangerine);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+.budget-cell h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.125rem, 1.6vw, 1.5rem);
+  text-transform: uppercase;
+  line-height: 0.9;
+  margin-bottom: var(--space-3);
+}
+
+/* ===== KEY ELEMENTS ===== */
+.elements {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: var(--rule);
+}
+.element {
+  padding: var(--space-6) var(--space-5) var(--space-7) 0;
+  border-right: var(--rule-light);
+  border-bottom: var(--rule-light);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.element:nth-child(3n) { border-right: none; padding-right: 0; }
+.element .lab {
+  font-family: var(--font-tag);
+  font-size: var(--type-caption);
+  text-transform: uppercase;
+}
+.element h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  text-transform: uppercase;
+  line-height: 0.85;
+}
+.element p { font-size: var(--type-body); }
+
+/* ===== REFERENCE ===== */
+.reference {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-9);
+  align-items: end;
+}
+.reference-mega {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.75rem, 7.5vw, 6.5rem);
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+.reference-mega em {
+  font-style: normal;
+  display: block;
+  color: var(--tangerine);
+}
+.reference-meta {
+  border-top: var(--rule);
+  padding-top: var(--space-5);
+}
+.reference-meta .row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: var(--rule-light);
+}
+.reference-meta .row .k {
+  font-family: var(--font-tag);
+  font-size: var(--type-caption);
+  text-transform: uppercase;
+}
+
+/* ===== TERRY ROLE ===== */
+.role {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: var(--rule);
+}
+.role-cell {
+  padding: var(--space-7) var(--space-5) var(--space-7) 0;
+  border-right: var(--rule);
+}
+.role-cell:last-child { border-right: none; padding-right: 0; }
+.role-cell .num {
+  font-family: var(--font-tag);
+  font-size: var(--type-caption);
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+.role-cell h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  text-transform: uppercase;
+  line-height: 0.85;
+  margin-bottom: var(--space-4);
+}
+.role-cell.tangerine {
+  background: var(--tangerine);
+  color: var(--near-black);
+  padding-left: var(--space-5);
+  padding-right: var(--space-5);
+  margin-right: -1px;
+}
+
+/* ===== FOOTER / CTA ===== */
+.tail {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: var(--space-8);
+  padding: var(--space-9) 0;
+  align-items: end;
+  border-bottom: none;
+}
+.cta {
+  display: inline-block;
+  background: var(--tangerine);
+  color: var(--near-black);
+  font-family: var(--font-tag);
+  font-size: clamp(0.75rem, 0.9vw, 0.875rem);
+  text-transform: uppercase;
+  letter-spacing: 0;
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--tangerine);
+  transition: background var(--duration) var(--ease-expo), color var(--duration) var(--ease-expo), border-color var(--duration) var(--ease-expo);
+}
+.cta:hover {
+  background: var(--near-black);
+  color: var(--off-white);
+  border-color: var(--near-black);
+  text-decoration: none;
+}
+.tail-mega {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3rem, 9vw, 8rem);
+  line-height: 0.78;
+  text-transform: uppercase;
+}
+.tail-meta {
+  display: grid;
+  gap: var(--space-2);
+}
+.tail-meta .row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: var(--rule-light);
+}
+.tail-meta .row .k { font-family: var(--font-tag); font-size: var(--type-caption); text-transform: uppercase; }
+.tail-meta .row .v { font-family: var(--font-body); }
+
+.signoff {
+  border-top: var(--rule);
+  padding: var(--space-5) 0 var(--space-7);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-5);
+}
+.signoff .right { justify-self: end; text-align: right; }
+.signoff .mid { justify-self: center; }
+
+/* ===== UTILITY ===== */
+.mono-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 880px) {
+  .id-grid,
+  .concept-grid,
+  .aesthetic,
+  .reference,
+  .tail {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+  .palette-grid { grid-template-columns: repeat(2, 1fr); }
+  .swatch { aspect-ratio: 1 / 1; }
+  .swatch:nth-child(2n) { border-right: none; }
+  .swatch { border-bottom: var(--rule); }
+  .palette-grid .swatch:nth-last-child(-n+1) { border-bottom: none; }
+  .budget-grid { grid-template-columns: 1fr; }
+  .budget-cell { border-right: none; padding-right: 0; }
+  .elements { grid-template-columns: 1fr; }
+  .element { border-right: none; padding-right: 0; }
+  .role { grid-template-columns: 1fr; }
+  .role-cell { border-right: none; border-bottom: var(--rule); padding-right: 0; }
+  .role-cell:last-child { border-bottom: none; }
+  .role-cell.tangerine { padding-left: var(--space-5); padding-right: var(--space-5); margin-right: 0; }
+  .signoff { grid-template-columns: 1fr; }
+  .signoff .mid, .signoff .right { justify-self: start; text-align: left; }
+  .section-head { grid-template-columns: 1fr; gap: var(--space-3); }
+  .id-row { grid-template-columns: 90px 1fr; }
+  .reference-meta .row { grid-template-columns: 90px 1fr; }
+  .tail-meta .row { grid-template-columns: 90px 1fr; }
+}
+
+@media (max-width: 540px) {
+  .metabar { grid-template-columns: 1fr; gap: var(--space-2); }
+  .metabar .mid, .metabar .right { justify-self: start; text-align: left; }
+  .hero-eyebrow, .hero-sub { grid-template-columns: 1fr; }
+  .hero-eyebrow .right, .hero-sub .right { justify-self: start; text-align: left; }
+  .palette-grid { grid-template-columns: 1fr; }
+  .swatch { border-right: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- METABAR -->
+  <header class="metabar">
+    <div class="left tag">Rough — Hospitality Interiors</div>
+    <div class="mid tag">Internal Brief — Confidential</div>
+    <div class="right tag">Edinburgh · rough.ink · MAY 2026</div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" style="border-top: none;">
+    <div class="hero-eyebrow">
+      <div class="left">
+        <div class="tag">Project № 5049</div>
+      </div>
+      <div class="right">
+        <div class="tag">Glasgow · Star Pubs &amp; Bars · Refurb</div>
+      </div>
+    </div>
+
+    <h1 class="hero-mega">Driftwood</h1>
+
+    <div class="hero-sub">
+      <div class="left">
+        <div class="descriptor">Elevated <span>Dive Bar.</span></div>
+      </div>
+      <div class="right">
+        <div class="tag">Status — Brief Live · Tenant TBC</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSITIONING / ID -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">01 — Positioning</div>
+      <div class="section-title">A landlord <em>spec refurb</em> that looks like a tenant fit-out.</div>
+    </div>
+
+    <div class="id-grid">
+      <div class="id-statement">
+        Box clever. <span class="accent">High impact, low CAPEX.</span> Build the mood, hide the budget, hand it over ready to trade.
+      </div>
+
+      <div class="id-card">
+        <div class="id-row"><div class="k">Number</div><div class="v strong mono-num">5049</div></div>
+        <div class="id-row"><div class="k">Name</div><div class="v strong">Driftwood</div></div>
+        <div class="id-row"><div class="k">Client</div><div class="v">Star Pubs &amp; Bars (Heineken leased estate)</div></div>
+        <div class="id-row"><div class="k">Location</div><div class="v">Glasgow</div></div>
+        <div class="id-row"><div class="k">Type</div><div class="v">Refurbishment — landlord spec</div></div>
+        <div class="id-row"><div class="k">Tenant</div><div class="v">None yet — speculative</div></div>
+        <div class="id-row"><div class="k">Budget</div><div class="v">Limited — discipline-led</div></div>
+        <div class="id-row"><div class="k">Status</div><div class="v">Brief approved — concept stage</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPT -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">02 — Concept</div>
+      <div class="section-title">The <em>elevated dive bar.</em></div>
+    </div>
+
+    <div class="concept-grid">
+      <div class="left">
+        <div class="pull-quote">
+          Curated. <span class="lime">Moody.</span> Lived-in. Not heavy. Not grimy. Not trying.
+        </div>
+      </div>
+      <div class="right body-stack">
+        <p>Driftwood reads like a place that already had a life before you walked in. Worn timber, dim corners, things on the walls that look collected rather than bought. The trick is that none of it is accidental — every move is paid for in dwell time, return visits and spend-per-head.</p>
+        <p>This is not a dive bar. It is the version of a dive bar a designer would draw if you asked them to make somewhere honest. Clientele skews late-twenties to forties, early-evening through late-night, drinks-led with snack-grade food.</p>
+        <p>The room earns its rent on <span class="hl">atmosphere over fit-out spend</span>. Lighting, palette, sound and a few hero objects do the heavy lifting.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AESTHETIC DIRECTION -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">03 — Aesthetic</div>
+      <div class="section-title">Maximalist botanical, <em>retro gaming undercurrent.</em></div>
+    </div>
+
+    <div class="aesthetic">
+      <div class="cross">
+        Maximalist<br/>Botanical<br/><span class="x">×</span> Retro<br/>Gaming
+        <small>Density of objects, thickness of foliage, warmth of analogue.</small>
+      </div>
+      <div class="notes">
+        <div class="note-row">
+          <div class="num">A</div>
+          <div>Layered greenery — real where light allows, faux where it doesn't. Density matters more than authenticity here.</div>
+        </div>
+        <div class="note-row">
+          <div class="num">B</div>
+          <div>Pinball, arcade cabinets and table-top games as anchor objects. Pulled-in second-hand, not bought new.</div>
+        </div>
+        <div class="note-row">
+          <div class="num">C</div>
+          <div>Neon signage as light source and graphic. One hero piece, secondary cues kept restrained.</div>
+        </div>
+        <div class="note-row">
+          <div class="num">D</div>
+          <div>Vintage pendants — mismatched but coordinated by tone. Auction-house route over retail.</div>
+        </div>
+        <div class="note-row">
+          <div class="num">E</div>
+          <div>Warm-dim LED zoning. Lighting does the budget concealment work — see Section 04.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PALETTE STRIP -->
+    <div class="palette">
+      <div class="palette-grid">
+        <div class="swatch s-teal">
+          <div class="tag">Direction · 01</div>
+          <div>
+            <div class="name">Deep Teal</div>
+            <div class="hex" style="margin-top:.5rem;">#1F3A3D</div>
+          </div>
+        </div>
+        <div class="swatch s-green">
+          <div class="tag">Direction · 02</div>
+          <div>
+            <div class="name">Forest</div>
+            <div class="hex" style="margin-top:.5rem;">#2C3A2A</div>
+          </div>
+        </div>
+        <div class="swatch s-black">
+          <div class="tag">Anchor</div>
+          <div>
+            <div class="name">Off-Black</div>
+            <div class="hex" style="margin-top:.5rem;">#272727</div>
+          </div>
+        </div>
+        <div class="swatch s-choc">
+          <div class="tag">Bridge</div>
+          <div>
+            <div class="name">Chocolate</div>
+            <div class="hex" style="margin-top:.5rem;">#6D422E</div>
+          </div>
+        </div>
+        <div class="swatch s-tang">
+          <div class="tag">Highlight</div>
+          <div>
+            <div class="name">Signage Pop</div>
+            <div class="hex" style="margin-top:.5rem;">Neon-led</div>
+          </div>
+        </div>
+      </div>
+      <div class="palette-caption">
+        <div class="left tag">Palette direction — desaturated, deep, forgiving</div>
+        <div class="right tag">Hex values are indicative — final spec at design stage</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET / BOX CLEVER -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">04 — Budget Approach</div>
+      <div class="section-title">Spend where the punter <em>feels it.</em></div>
+    </div>
+
+    <div class="boxclever-head">Box <em>Clever.</em></div>
+
+    <div class="budget-grid">
+      <div class="budget-cell">
+        <div class="num">01</div>
+        <h3>Lighting carries the room</h3>
+        <p>Warm-dim LED zoning, gels on architectural fittings, neon as feature. A good lighting scheme on cheap walls beats a poor scheme on panelled ones. Largest single line on the FF&amp;E — protected.</p>
+      </div>
+      <div class="budget-cell">
+        <div class="num">02</div>
+        <h3>Paint over plaster</h3>
+        <p>Deep desaturated tones forgive uneven walls, hide dated joinery and read intentional. Existing fabric kept where it can be reframed. No structural moves unless they unlock revenue.</p>
+      </div>
+      <div class="budget-cell">
+        <div class="num">03</div>
+        <h3>Hero objects, not hero finishes</h3>
+        <p>One pinball machine and a neon sign do more for spend-per-head than another £8k of joinery. Sourced second-hand, restored where needed, badged as character.</p>
+      </div>
+      <div class="budget-cell">
+        <div class="num">04</div>
+        <h3>FF&amp;E mixed, not matched</h3>
+        <p>Auction houses, salvage yards, local makers. A coherent set of mismatched chairs reads more like a tenant operator than a flat-pack landlord refit. Reduces lead time and cost in one move.</p>
+      </div>
+      <div class="budget-cell">
+        <div class="num">05</div>
+        <h3>Foliage as cladding</h3>
+        <p>Layered greenery softens hard surfaces and breaks sightlines without joinery cost. Specified for a maintenance-light handover — no tenant should inherit a forest they cannot keep.</p>
+      </div>
+      <div class="budget-cell">
+        <div class="num">06</div>
+        <h3>Sound, not silence</h3>
+        <p>A modest specified sound system is FF&amp;E-grade kit. The room should sound like it knows itself before the first pour. Spec to leased-estate compliance, not festival-grade.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY ELEMENTS -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">05 — Key Elements</div>
+      <div class="section-title">Six moves that <em>carry the room.</em></div>
+    </div>
+
+    <div class="elements">
+      <article class="element">
+        <div class="lab">Anchor · 01</div>
+        <h3>Pinball &amp; arcade</h3>
+        <p>One restored pinball machine in the back room. Optional second-hand cocktail-table arcade as a future tenant add. Generates dwell time and a reason to return without reaching for the pricing list.</p>
+      </article>
+      <article class="element">
+        <div class="lab">Anchor · 02</div>
+        <h3>Hero neon</h3>
+        <p>One commissioned neon piece behind the back bar. Text TBC at tenant signing. Doubles as primary feature lighting — saves a downlight specification.</p>
+      </article>
+      <article class="element">
+        <div class="lab">Anchor · 03</div>
+        <h3>Vintage pendant cluster</h3>
+        <p>Mismatched pendants over the bar pass and hero booth. Coordinated by warmth and brass tones. Sourced via auction over six weeks — tracked separately on the FF&amp;E sheet.</p>
+      </article>
+      <article class="element">
+        <div class="lab">Anchor · 04</div>
+        <h3>Warm-dim LED zoning</h3>
+        <p>Three lighting zones — entrance, bar, back room. Each on its own dimming circuit. The room should be re-readable across trading hours without changing fittings.</p>
+      </article>
+      <article class="element">
+        <div class="lab">Anchor · 05</div>
+        <h3>Botanical layering</h3>
+        <p>Concentrated foliage at sightline-breakers — bar back, booth ends, threshold. Maintenance brief left with the operator at handover. Specified for low-light tolerance.</p>
+      </article>
+      <article class="element">
+        <div class="lab">Anchor · 06</div>
+        <h3>Joinery, restrained</h3>
+        <p>Existing bar retained where structurally sound. Top re-clad, fascia restained, brass detailing added. New joinery confined to back-bar shelving and one banquette run.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- REFERENCE -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">06 — Reference</div>
+      <div class="section-title">Look at this and <em>nothing else.</em></div>
+    </div>
+
+    <div class="reference">
+      <div class="left">
+        <div class="reference-mega">
+          The Lioness<br/>of Leith.<em>Edinburgh.</em>
+        </div>
+      </div>
+      <div class="right reference-meta">
+        <div class="row"><div class="k tag">Why</div><div>Single most accurate read on the elevated dive-bar mood we are aiming for. Density without weight. Fun without try-hard.</div></div>
+        <div class="row"><div class="k tag">What works</div><div>Object density, palette discipline, lighting zoning, music programme, casual food offer, low-effort entry threshold.</div></div>
+        <div class="row"><div class="k tag">What we shift</div><div>Glasgow audience, leased-estate constraints, no live tenant. Concept tightened so it survives a tenant we have not yet met.</div></div>
+        <div class="row"><div class="k tag">Avoid</div><div>Pastiche, over-styling, anything that reads as themed. Driftwood is not a theme bar.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERRY ROLE -->
+  <section>
+    <div class="section-head">
+      <div class="section-num">07 — Terry's Remit</div>
+      <div class="section-title">Three lanes. <em>Hold them.</em></div>
+    </div>
+
+    <div class="role">
+      <div class="role-cell">
+        <div class="num">Lane · 01</div>
+        <h3>Intelligence.</h3>
+        <p>Site visits, audience read, competitor scan in the immediate Glasgow catchment. Feed back to design with operator-grade observation — footfall patterns, comparable spend-per-head, dwell windows.</p>
+      </div>
+      <div class="role-cell tangerine">
+        <div class="num">Lane · 02</div>
+        <h3>FF&amp;E sourcing.</h3>
+        <p>Auction routes, salvage, second-hand restoration. Pinball, pendants, seating, neon commission. Track lead times against the programme — protect the long-lead items first.</p>
+      </div>
+      <div class="role-cell">
+        <div class="num">Lane · 03</div>
+        <h3>Admin.</h3>
+        <p>Asana hygiene, supplier comms, schedule maintenance, handover documentation for the eventual tenant. The brief lives or dies by the paperwork no one wants to do.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAIL / CTA -->
+  <section style="border-bottom:none;">
+    <div class="tail">
+      <div class="left">
+        <div class="tag" style="margin-bottom: var(--space-5);">Open the working file</div>
+        <div class="tail-mega">Project Live<br/>in <em style="font-style:normal; color: var(--tangerine);">Asana.</em></div>
+      </div>
+      <div class="right">
+        <div class="tail-meta">
+          <div class="row"><div class="k">Project ID</div><div class="v mono-num">1214468946913665</div></div>
+          <div class="row"><div class="k">Lead</div><div class="v">Terry — terry@rough.ink</div></div>
+          <div class="row"><div class="k">Studio</div><div class="v">Rough · Edinburgh</div></div>
+        </div>
+        <div style="margin-top: var(--space-6);">
+          <a class="cta" href="https://app.asana.com/0/1214468946913665" target="_blank" rel="noopener">Open in Asana →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="signoff">
+      <div class="left tag">№ 5049 — Driftwood, Glasgow</div>
+      <div class="mid tag">Brief v1 · Internal · MAY 2026</div>
+      <div class="right tag">Rough — rough.ink</div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
