@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Driftwood — A4 Poster | Rough</title>
+<style>
+/* ============================================================
+   ROUGH — Driftwood A4 Poster v3
+   hermes-print + top-design · hand-built
+   210 × 297 mm · A4 portrait · cover-grade
+   ============================================================ */
+
+@font-face {
+  font-family: 'FoundersGroteskXCond';
+  src: url('fonts/FoundersGroteskXCond-Bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Sohne';
+  src: url('fonts/Sohne-Kraftig.ttf') format('truetype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'SohneBreit';
+  src: url('fonts/SohneBreit-Kraftig.ttf') format('truetype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+:root {
+  --near-black: #272727;
+  --off-white: #EDEFE9;
+  --chocolate: #6D422E;
+  --tangerine: #FC8143;
+  --acid-lime: #ECFEA7;
+
+  --font-display: 'FoundersGroteskXCond', 'Impact', 'Helvetica Neue Condensed', sans-serif;
+  --font-body: 'Sohne', 'Söhne', 'Helvetica Neue', Arial, sans-serif;
+  --font-tag: 'SohneBreit', 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+@page { size: A4; margin: 0; }
+
+html, body {
+  background: var(--near-black);
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--near-black);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+/* Poster viewport */
+.poster {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto;
+  background: var(--near-black);
+  overflow: hidden;
+}
+
+/* Hero image */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url("images/mood/Dante's Hifi Bar.jpg") center/cover no-repeat;
+  filter: brightness(0.55) saturate(0.7);
+}
+
+/* Dark vignette — barely touches the bottom third */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(39, 39, 39, 0.7) 0%,
+    rgba(39, 39, 39, 0.4) 35%,
+    rgba(39, 39, 39, 0.15) 65%,
+    rgba(39, 39, 39, 0.05) 100%
+  );
+}
+
+/* Acid lime accent bar — top right, thin */
+.accent-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6mm;
+  height: 100%;
+  background: var(--tangerine);
+  opacity: 0.9;
+}
+
+/* Content layer — asymmetric: massive display bleeding left, copy pinned right */
+.content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  padding: 10mm 0 8mm 0;
+}
+
+/* Top rail — right-aligned in the right column area */
+.rail {
+  grid-column: 2;
+  padding-right: 14mm;
+  padding-bottom: 3mm;
+  border-bottom: 1px solid rgba(237, 239, 233, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+}
+.eyebrow {
+  font-family: var(--font-tag);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: rgba(237, 239, 233, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 1.5mm;
+}
+.eyebrow .dot {
+  width: 4pt; height: 4pt;
+  background: var(--tangerine);
+  flex-shrink: 0;
+}
+.page-ref {
+  font-family: var(--font-tag);
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: rgba(237, 239, 233, 0.45);
+}
+
+/* Display — massive, bleeding left, negative tracked, ALL CAPS */
+.display-block {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  margin-left: -6mm; /* intentional bleed */
+}
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 132pt;
+  line-height: 0.74;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  word-break: break-all;
+}
+
+/* Right column — anchored bottom-right */
+.right-col {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  padding-right: 14mm;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+}
+
+.subhead {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 8pt;
+  line-height: 1.25;
+  color: var(--off-white);
+}
+.subhead .city {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14pt;
+  line-height: 0.82;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  display: block;
+  color: var(--tangerine);
+}
+
+.body-copy {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 6.5pt;
+  line-height: 1.35;
+  max-width: 42ch;
+  color: rgba(237, 239, 233, 0.8);
+}
+
+/* Detail strip */
+.details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2mm;
+  padding-top: 3mm;
+  border-top: 1px solid rgba(237, 239, 233, 0.18);
+}
+.detail-label {
+  font-family: var(--font-tag);
+  font-size: 5pt;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: rgba(237, 239, 233, 0.4);
+  margin-bottom: 0.5mm;
+}
+.detail-value {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 6.5pt;
+  line-height: 1.2;
+  color: var(--off-white);
+}
+
+/* Bottom meta — right column area */
+.meta {
+  grid-column: 2;
+  padding-right: 14mm;
+  padding-top: 3mm;
+  border-top: 1px solid rgba(237, 239, 233, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+  font-family: var(--font-tag);
+  font-size: 5pt;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+.meta .row {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(237, 239, 233, 0.5);
+}
+.meta .row span:last-child {
+  color: rgba(237, 239, 233, 0.7);
+}
+
+/* Acid lime micro-accent — one tiny detail */
+.body-copy .hl {
+  color: var(--tangerine);
+}
+
+/* Print */
+@media print {
+  .poster { position: fixed; top: 0; left: 0; margin: 0; }
+  html, body { background: var(--near-black); }
+}
+
+/* Screen centring */
+@media screen {
+  body {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 16px;
+  }
+}
+
+/* Screen shrink */
+@media screen and (max-width: 230mm) {
+  .poster {
+    width: 100vw;
+    max-width: 210mm;
+    height: auto;
+    aspect-ratio: 210 / 297;
+  }
+  .display { font-size: clamp(48pt, 24vw, 132pt); }
+  .subhead { font-size: clamp(5pt, 1.5vw, 8pt); }
+  .subhead .city { font-size: clamp(9pt, 2.8vw, 14pt); }
+  .body-copy { font-size: clamp(4.5pt, 1.2vw, 6.5pt); }
+}
+</style>
+</head>
+<body>
+
+<article class="poster" aria-label="Driftwood concept poster, A4 portrait">
+  <div class="hero-bg" role="img" aria-label="Dante's HiFi bar — moody, low-lit interior"></div>
+  <div class="vignette"></div>
+  <div class="accent-bar"></div>
+
+  <div class="content">
+    <!-- Rail — right column -->
+    <header class="rail">
+      <span class="eyebrow"><span class="dot"></span>Project 5049 · Concept Direction · May 2026</span>
+      <span class="page-ref">01 / 10</span>
+    </header>
+
+    <!-- Display — bleeds across both columns, massive -->
+    <div class="display-block">
+      <h1 class="display">Driftwood</h1>
+    </div>
+
+    <!-- Right column copy -->
+    <div class="right-col">
+      <div class="subhead">
+        Elevated Dive Bar&thinsp;&mdash;&thinsp;<span class="city">Glasgow</span>
+      </div>
+      <p class="body-copy">A room that feels found, not furnished. A late-night bar where the mood does the work&thinsp;&mdash;&thinsp;moody, lived-in, quietly confident. Built for the customer who wants a <span class="hl">second drink</span> before they have finished the first.</p>
+      <div class="details">
+        <div>
+          <div class="detail-label">Operator</div>
+          <div class="detail-value">Star Pubs &amp; Bars</div>
+        </div>
+        <div>
+          <div class="detail-label">Location</div>
+          <div class="detail-value">Sauchiehall, Glasgow</div>
+        </div>
+        <div>
+          <div class="detail-label">Format</div>
+          <div class="detail-value">Late-night, drinks-led</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meta — right column -->
+    <footer class="meta">
+      <div class="row">
+        <span>Studio</span>
+        <span>Rough · Edinburgh · rough.ink</span>
+      </div>
+      <div class="row">
+        <span>Document</span>
+        <span>Concept Direction · Confidential</span>
+      </div>
+      <div class="row">
+        <span>Client</span>
+        <span>Prepared for Star Pubs &amp; Bars</span>
+      </div>
+    </footer>
+  </div>
+</article>
+
+</body>
+</html>
