@@ -2,6 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Driftwood — Concept Brief | Rough</title>
 <style>
 @font-face {
@@ -27,475 +28,884 @@
   --tangerine: #FC8143;
   --acid-lime: #ECFEA7;
 
+  --teal: #1F3A3D;
+  --forest: #2C3A2A;
+
+  --fg2: #5A5A5A;
+
   --font-display: 'FoundersGroteskXCond', 'Impact', 'Helvetica Neue Condensed', sans-serif;
   --font-body: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
   --font-tag: 'SohneBreit', 'Sohne', 'Helvetica Neue', Arial, sans-serif;
 
   --rule: 1px solid var(--near-black);
   --rule-light: 1px solid rgba(39, 39, 39, 0.18);
+  --rule-inverse: 1px solid var(--off-white);
+
+  --max: 1200px;
+  --pad: clamp(1.5rem, 4vw, 3rem);
 }
 
-@page { size: A3 landscape; margin: 0; }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
+img { display: block; max-width: 100%; height: auto; border-radius: 0; }
 
-html, body {
-  width: 420mm;
-  height: 297mm;
+html { scroll-behavior: smooth; }
+
+body {
   font-family: var(--font-body);
   font-weight: 500;
+  font-size: clamp(0.9375rem, 0.4vw + 0.8rem, 1rem);
+  line-height: 1.5;
+  letter-spacing: 0;
   color: var(--near-black);
   background: var(--off-white);
   -webkit-font-smoothing: antialiased;
   text-rendering: geometricPrecision;
-  overflow: hidden;
 }
 
-img { display: block; width: 100%; height: 100%; object-fit: cover; }
-
-.page {
-  width: 420mm;
-  height: 297mm;
-  display: grid;
-  grid-template-rows: 12mm 75mm 95mm 55mm 45mm 15mm;
-  background: var(--off-white);
-}
-
-/* ---- HEADER ---- */
-.header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  padding: 0 8mm;
-  border-bottom: var(--rule);
-  background: var(--near-black);
-  color: var(--off-white);
-}
-.header .logo {
+.display {
   font-family: var(--font-display);
-  font-size: 18pt;
-  line-height: 0.7;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.78;
+  letter-spacing: 0;
+}
+
+.tag {
+  font-family: var(--font-tag);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 1.1;
+}
+
+.label {
+  font-family: var(--font-tag);
+  font-weight: 500;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0;
 }
-.header .meta-mid {
-  font-family: var(--font-tag);
-  font-size: 8pt;
-  text-transform: uppercase;
-  text-align: center;
-  color: var(--off-white);
-}
-.header .meta-mid .dot { color: var(--tangerine); margin: 0 6px; }
-.header .meta-end {
-  font-family: var(--font-tag);
-  font-size: 8pt;
-  text-transform: uppercase;
-  text-align: right;
-  color: var(--off-white);
+
+p { max-width: 62ch; }
+p + p { margin-top: 1rem; }
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
 }
 
-/* ---- HERO ---- */
-.hero {
-  display: grid;
-  grid-template-columns: 250mm 170mm;
+/* ---------- Topbar ---------- */
+.topbar {
   border-bottom: var(--rule);
-}
-.hero-text {
-  padding: 8mm 8mm 6mm;
-  display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  border-right: var(--rule);
   background: var(--off-white);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
-.hero-tag {
-  font-family: var(--font-tag);
-  font-size: 8pt;
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem var(--pad);
+  max-width: var(--max);
+  margin: 0 auto;
+  gap: 1rem;
+}
+.topbar .mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1;
   text-transform: uppercase;
-  color: var(--chocolate);
-  margin-bottom: 4mm;
 }
-.hero-tag .lime {
-  background: var(--acid-lime);
-  padding: 2px 6px;
-  margin-left: 6px;
-  color: var(--near-black);
+.topbar .meta-row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  border-bottom: var(--rule);
+  padding: clamp(2rem, 6vw, 4.5rem) 0 0 0;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: 1.05fr 1fr; align-items: end; }
+}
+.hero-meta {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: var(--rule-light);
+  margin-bottom: 2rem;
 }
 .hero-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 168pt;
-  line-height: 0.7;
-  text-transform: uppercase;
-  letter-spacing: 0;
-  color: var(--near-black);
+  font-size: clamp(5.5rem, 18vw, 14rem);
+  line-height: 0.78;
+  margin: 0 0 1.5rem 0;
 }
-.hero-sub {
+.hero-subhead {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 26pt;
-  line-height: 0.85;
   text-transform: uppercase;
-  margin-top: 5mm;
+  font-size: clamp(1.5rem, 3vw + 0.5rem, 2.75rem);
+  line-height: 0.92;
+  letter-spacing: 0;
+  margin-bottom: 2rem;
   color: var(--chocolate);
 }
-.hero-positioning {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8mm;
-  padding-top: 6mm;
-  border-top: var(--rule-light);
-  margin-top: 4mm;
-}
-.hero-positioning p {
-  font-size: 9.5pt;
+.hero-body p {
+  font-size: clamp(1rem, 0.5vw + 0.9rem, 1.125rem);
   line-height: 1.5;
-  max-width: 52ch;
+  max-width: 48ch;
 }
-.hero-image { position: relative; overflow: hidden; }
-.hero-image .stamp {
-  position: absolute;
-  top: 6mm;
-  left: 6mm;
-  background: var(--tangerine);
-  color: var(--near-black);
-  font-family: var(--font-tag);
-  font-size: 8pt;
-  text-transform: uppercase;
-  padding: 4px 8px;
-  z-index: 2;
-}
-
-/* ---- MOOD ---- */
-.mood {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr 1fr;
-  border-bottom: var(--rule);
-}
-.mood .cell { position: relative; overflow: hidden; border-right: var(--rule); border-bottom: var(--rule); }
-.mood .cell:nth-child(4n) { border-right: 0; }
-.mood .cell:nth-child(n+5) { border-bottom: 0; }
-.mood .cell .cap {
-  position: absolute;
-  bottom: 4mm; left: 4mm;
-  font-family: var(--font-tag);
-  font-size: 7pt;
-  text-transform: uppercase;
-  color: var(--off-white);
-  background: rgba(39,39,39,0.78);
-  padding: 3px 6px;
-}
-.mood-banner {
-  position: absolute;
-  top: -1px;
-  left: 0;
-  z-index: 5;
-  background: var(--near-black);
-  color: var(--off-white);
-  font-family: var(--font-tag);
-  font-size: 8pt;
-  text-transform: uppercase;
-  padding: 3px 8px;
-}
-
-/* ---- LOGOS BAND ---- */
-.logos {
-  display: grid;
-  grid-template-columns: 280mm 140mm;
-  border-bottom: var(--rule);
-}
-.logos-main {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-right: var(--rule);
-}
-.logo-card {
-  display: grid;
-  grid-template-rows: 8mm 1fr 8mm;
-  border-right: var(--rule-light);
+.hero-image {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: var(--rule);
   background: var(--near-black);
 }
-.logo-card:last-child { border-right: 0; }
-.logo-card .lc-top, .logo-card .lc-bot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5mm;
-  font-family: var(--font-tag);
-  font-size: 8pt;
-  text-transform: uppercase;
-  color: var(--off-white);
-  background: var(--near-black);
-}
-.logo-card .lc-bot { color: var(--off-white); border-top: 1px solid rgba(237,239,233,0.15); }
-.logo-card .lc-bot .num { color: var(--tangerine); }
-.logo-card .lc-img { background: var(--near-black); position: relative; overflow: hidden; }
-.logo-card .lc-img img { object-fit: contain; padding: 5mm; }
-
-.vibes {
-  display: grid;
-  grid-template-rows: 8mm 1fr;
-  background: var(--off-white);
-}
-.vibes-head {
-  display: flex;
-  align-items: center;
-  padding: 0 5mm;
-  font-family: var(--font-tag);
-  font-size: 8pt;
-  text-transform: uppercase;
-  border-bottom: var(--rule-light);
-  justify-content: space-between;
-}
-.vibes-head .pip { color: var(--chocolate); }
-.vibe-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-}
-.vibe { position: relative; overflow: hidden; border-right: var(--rule-light); border-bottom: var(--rule-light); }
-.vibe:nth-child(2n) { border-right: 0; }
-.vibe:nth-child(n+3) { border-bottom: 0; }
-.vibe .v-cap {
+.hero-image img { width: 100%; height: 100%; object-fit: cover; }
+.hero-image .image-tag {
   position: absolute;
-  bottom: 3mm; left: 3mm;
-  font-family: var(--font-tag);
-  font-size: 7pt;
-  text-transform: uppercase;
-  color: var(--off-white);
-  background: rgba(39,39,39,0.82);
-  padding: 2px 5px;
-}
-
-/* ---- DESIGN MOVES ---- */
-.moves {
-  display: grid;
-  grid-template-columns: 70mm repeat(5, 1fr);
-  border-bottom: var(--rule);
-}
-.moves-label {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  padding: 5mm;
-  border-right: var(--rule);
-  background: var(--near-black);
-  color: var(--off-white);
-}
-.moves-label .ml-tag {
-  font-family: var(--font-tag);
-  font-size: 7.5pt;
-  text-transform: uppercase;
-  color: var(--tangerine);
-}
-.moves-label .ml-title {
-  font-family: var(--font-display);
-  font-size: 32pt;
-  line-height: 0.78;
-  text-transform: uppercase;
-  margin-top: 2mm;
-}
-.moves-label .ml-sub {
-  font-family: var(--font-tag);
-  font-size: 7pt;
-  text-transform: uppercase;
-  color: var(--off-white);
-  opacity: 0.6;
-  margin-top: 2mm;
-}
-.move {
-  display: grid;
-  grid-template-rows: 18mm 1fr;
-  border-right: var(--rule-light);
-}
-.move:last-child { border-right: 0; }
-.move .m-img { overflow: hidden; border-bottom: var(--rule-light); }
-.move .m-body { padding: 3mm 4mm; display: grid; grid-template-rows: auto auto 1fr; }
-.move .m-num {
-  font-family: var(--font-tag);
-  font-size: 7pt;
-  color: var(--tangerine);
-  text-transform: uppercase;
-}
-.move .m-h {
-  font-family: var(--font-display);
-  font-size: 16pt;
-  line-height: 0.85;
-  text-transform: uppercase;
-  margin-top: 1mm;
-  color: var(--near-black);
-}
-.move .m-d {
-  font-size: 7.5pt;
-  line-height: 1.4;
-  margin-top: 2mm;
-  color: var(--near-black);
-}
-
-/* ---- FOOTER ---- */
-.footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  align-items: center;
-  padding: 0 8mm;
-  font-family: var(--font-tag);
-  font-size: 7.5pt;
-  text-transform: uppercase;
-  color: var(--near-black);
+  left: 0; bottom: 0;
+  padding: 0.5rem 0.75rem;
   background: var(--off-white);
   border-top: var(--rule);
+  border-right: var(--rule);
 }
-.footer .f-cell { display: flex; align-items: center; gap: 6px; }
-.footer .f-cell .pip {
-  display: inline-block;
-  width: 8px; height: 8px;
-  background: var(--tangerine);
-}
-.footer .f-cell.right { justify-content: flex-end; }
-.footer .lime-pill {
-  background: var(--acid-lime);
-  padding: 3px 8px;
-  color: var(--near-black);
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 0 1.5rem 0;
+  border-top: var(--rule);
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  flex-wrap: wrap;
 }
 
-/* ---- UTILITIES ---- */
-.kicker {
+/* ---------- Section ---------- */
+section {
+  padding: clamp(3rem, 7vw, 6rem) 0;
+  border-bottom: var(--rule);
+}
+section.dark {
+  background: var(--near-black);
+  color: var(--off-white);
+}
+section.dark .label,
+section.dark .tag { color: var(--off-white); }
+
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem 2rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  padding-bottom: 1.25rem;
+  border-bottom: var(--rule-light);
+}
+section.dark .section-head { border-bottom: 1px solid rgba(237, 239, 233, 0.18); }
+@media (min-width: 760px) {
+  .section-head {
+    grid-template-columns: 12rem 1fr;
+    align-items: end;
+  }
+}
+.section-num {
   font-family: var(--font-tag);
-  font-size: 7.5pt;
+  font-size: 0.75rem;
   text-transform: uppercase;
+  letter-spacing: 0;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.25rem, 5vw + 0.5rem, 4.5rem);
+  line-height: 0.85;
+  letter-spacing: 0;
+}
+
+/* ---------- Concept ---------- */
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+@media (min-width: 900px) {
+  .concept-grid { grid-template-columns: 1fr 1fr; }
+}
+.concept-body p {
+  font-size: clamp(1rem, 0.4vw + 0.9rem, 1.125rem);
+  line-height: 1.55;
+}
+.concept-image {
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  border: 1px solid rgba(237, 239, 233, 0.25);
+}
+.concept-image img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Aesthetic ---------- */
+.aesthetic-formula {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 0.92;
+  margin-bottom: 2rem;
+}
+.aesthetic-formula .x {
+  color: var(--tangerine);
+  display: inline-block;
+  padding: 0 0.4em;
+}
+.aesthetic-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 700px) {
+  .aesthetic-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1000px) {
+  .aesthetic-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.aesthetic-tile {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border: var(--rule);
+  overflow: hidden;
+  background: var(--near-black);
+}
+.aesthetic-tile img { width: 100%; height: 100%; object-fit: cover; }
+.aesthetic-tile .tile-cap {
+  position: absolute;
+  left: 0; top: 0;
+  padding: 0.5rem 0.625rem;
+  background: var(--off-white);
+  border-right: var(--rule);
+  border-bottom: var(--rule);
+}
+
+/* ---------- Palette ---------- */
+.palette-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+@media (min-width: 900px) {
+  .palette-row { grid-template-columns: 1fr 1.1fr; align-items: start; }
+}
+.palette-body p {
+  font-size: clamp(1rem, 0.4vw + 0.9rem, 1.125rem);
+  line-height: 1.55;
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media (min-width: 700px) {
+  .swatches { grid-template-columns: repeat(4, 1fr); }
+}
+.swatch {
+  border: 1px solid rgba(237, 239, 233, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+.swatch .chip {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+}
+.swatch .swatch-meta {
+  padding: 0.75rem 0.875rem;
+  border-top: 1px solid rgba(237, 239, 233, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.swatch .swatch-name {
+  font-family: var(--font-tag);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+.swatch .swatch-hex {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: rgba(237, 239, 233, 0.65);
+}
+
+/* ---------- Moves ---------- */
+.moves-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: var(--rule-light);
+}
+@media (min-width: 800px) {
+  .moves-grid {
+    grid-template-columns: 1fr 1fr;
+    border-top: 0;
+  }
+}
+.move {
+  padding: clamp(1.5rem, 3vw, 2rem) 0;
+  border-bottom: var(--rule-light);
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 800px) {
+  .move {
+    border-top: var(--rule-light);
+    padding: clamp(1.5rem, 3vw, 2rem);
+  }
+  .move:nth-child(odd) { border-right: var(--rule-light); }
+}
+.move-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.875rem;
+  line-height: 1;
   color: var(--chocolate);
-  margin-bottom: 2mm;
+  text-transform: uppercase;
+}
+.move-head {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 1.5vw + 0.7rem, 1.75rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  margin-bottom: 0.625rem;
+}
+.move-body { font-size: 0.9375rem; line-height: 1.55; max-width: 52ch; }
+
+/* ---------- Reference ---------- */
+.reference-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+@media (min-width: 900px) {
+  .reference-grid { grid-template-columns: 1.1fr 1fr; align-items: start; }
+}
+.reference-image {
+  aspect-ratio: 4 / 3;
+  border: var(--rule);
+  overflow: hidden;
+  background: var(--near-black);
+}
+.reference-image img { width: 100%; height: 100%; object-fit: cover; }
+.reference-quote {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.625rem, 2.5vw + 0.5rem, 2.5rem);
+  line-height: 0.92;
+  letter-spacing: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Logo Directions ---------- */
+.logo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 700px) {
+  .logo-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.logo-card {
+  border: var(--rule);
+  background: var(--off-white);
+  display: flex;
+  flex-direction: column;
+}
+.logo-card .logo-image {
+  aspect-ratio: 1 / 1;
+  border-bottom: var(--rule);
+  background: var(--off-white);
+  overflow: hidden;
+}
+.logo-card .logo-image img { width: 100%; height: 100%; object-fit: cover; }
+.logo-card .logo-meta {
+  padding: 1rem 1.25rem 1.25rem 1.25rem;
+}
+.logo-card .logo-num {
+  font-family: var(--font-tag);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.logo-card .logo-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+/* ---------- Vibe references ---------- */
+.vibe-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media (min-width: 800px) {
+  .vibe-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.vibe-card {
+  display: flex;
+  flex-direction: column;
+  border: var(--rule);
+}
+.vibe-card .vibe-image {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--near-black);
+  border-bottom: var(--rule);
+}
+.vibe-card .vibe-image img { width: 100%; height: 100%; object-fit: cover; }
+.vibe-card .vibe-meta {
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.vibe-card .vibe-letter {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.vibe-card .vibe-name {
+  font-family: var(--font-tag);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  background: var(--near-black);
+  color: var(--off-white);
+  padding: clamp(2.5rem, 5vw, 4rem) 0 2rem 0;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(237, 239, 233, 0.2);
+}
+@media (min-width: 800px) {
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+}
+.footer-block .label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: rgba(237, 239, 233, 0.6);
+}
+.footer-block strong {
+  font-weight: 500;
+}
+.footer-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.85;
+}
+.footer-display .accent { color: var(--tangerine); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+}
+.footer a { color: var(--off-white); border-bottom: 1px solid rgba(237, 239, 233, 0.4); }
+.footer a:hover { color: var(--tangerine); border-color: var(--tangerine); text-decoration: none; }
+
+/* ---------- Print ---------- */
+@page { size: A3 landscape; margin: 12mm; }
+@media print {
+  .topbar { position: static; }
+  section { break-inside: avoid; page-break-inside: avoid; }
+  .hero { break-after: page; }
+  body { background: var(--off-white); }
 }
 </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">Rough</div>
-    <div class="meta-mid">5049 <span class="dot">·</span> Driftwood, Glasgow <span class="dot">·</span> Concept Brief</div>
-    <div class="meta-end">For Star Pubs &amp; Bars · Heineken Leased Estate</div>
-  </header>
+<!-- Topbar -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="mark">Rough</span>
+    <div class="meta-row">
+      <span class="tag">Project 5049</span>
+      <span class="tag">Concept Direction</span>
+      <span class="tag">v1.0 — May 2026</span>
+    </div>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-text">
-      <div class="hero-tag">Concept Direction <span class="lime">v1.0 · May 2026</span></div>
+<!-- Hero -->
+<section class="hero" style="border-bottom: 1px solid var(--near-black); padding-bottom: 0;">
+  <div class="wrap">
+    <div class="hero-meta">
+      <span class="tag">Prepared for Star Pubs &amp; Bars</span>
+      <span class="tag">Site — Glasgow</span>
+      <span class="tag">Stage — Concept</span>
+    </div>
+
+    <div class="hero-grid">
       <div>
-        <h1 class="hero-title">Driftwood</h1>
-        <div class="hero-sub">Elevated Dive Bar — Glasgow</div>
+        <h1 class="display hero-title">Driftwood</h1>
+        <div class="hero-subhead">Elevated Dive Bar<br>Glasgow</div>
+        <div class="hero-body">
+          <p>Driftwood is a room that feels found, not furnished. A late-night bar where the mood does the work — moody, lived-in, quietly confident. Curated without trying. Atmospheric without being heavy. Built for the customer who wants a second drink before they have finished the first.</p>
+        </div>
       </div>
-      <div class="hero-positioning">
-        <p>Driftwood reads as found, not styled. A late-night room that feels like it has always been there — moody, lived-in, and quietly confident. Layered botanicals, vintage pendants and warm-dim LED zoning carry the eye from the door to the back wall, where pinball and neon do the heavy lifting.</p>
-        <p>The pitch is tight: a maximalist, retro-gaming bar that earns its keep without renovating the bones. Investment is concentrated where the customer feels it — lighting, signage, surface texture — so every pound spent shows up at the table.</p>
-      </div>
-    </div>
-    <div class="hero-image">
-      <span class="stamp">Reference · Lioness of Leith</span>
-      <img src="images/mood/Dante%27s%20Hifi%20Bar.jpg" alt="Hero mood — retro hifi bar" />
-    </div>
-  </section>
 
-  <!-- MOOD -->
-  <section class="mood">
-    <div class="mood-banner">Mood — Atmosphere, Material, Light</div>
-    <div class="cell"><img src="images/mood/Brutto%20Sign%20Night.jpg" alt="" /><span class="cap">Neon Signage</span></div>
-    <div class="cell"><img src="images/mood/Urban%20Lounge%20Interior.jpg" alt="" /><span class="cap">Moody Lounge</span></div>
-    <div class="cell"><img src="images/mood/fc5e6a5b785996155a481a0ee554567f.jpg" alt="" /><span class="cap">Botanical Layering</span></div>
-    <div class="cell"><img src="images/mood/Motel%20Pop%20Art.jpg" alt="" /><span class="cap">Pop Art Punctuation</span></div>
-    <div class="cell"><img src="images/mood/Retro%20Diner%20Renzo.jpg" alt="" /><span class="cap">Retro Vinyl &amp; Chrome</span></div>
-    <div class="cell"><img src="images/mood/0e92412ac99d32ed36268a1b7e0ca4a9.jpg" alt="" /><span class="cap">Dark Atmospheric</span></div>
-    <div class="cell"><img src="images/mood/b2ab4a7ead6ce7f4c5b23f9f944e0ce1%20%281%29.jpg" alt="" /><span class="cap">Neon Detail</span></div>
-    <div class="cell"><img src="images/mood/Heart%20Alligators%20Folk%20Art.jpg" alt="" /><span class="cap">Folk Art Detail</span></div>
-  </section>
+      <figure class="hero-image">
+        <img src="images/mood/Dante's Hifi Bar.jpg" alt="Mood reference — Dante's Hifi Bar interior, low-lit moody bar with botanical layering" />
+        <figcaption class="tag image-tag">Mood — Hifi Bar Interior</figcaption>
+      </figure>
+    </div>
 
-  <!-- LOGOS -->
-  <section class="logos">
-    <div class="logos-main">
-      <div class="logo-card">
-        <div class="lc-top"><span>Logo Direction</span><span>01</span></div>
-        <div class="lc-img"><img src="images/logo/logo-concept-01.jpg" alt="Logo direction 01" /></div>
-        <div class="lc-bot"><span class="num">01 ·</span><span>Hand-drawn · maritime · folk</span></div>
-      </div>
-      <div class="logo-card">
-        <div class="lc-top"><span>Logo Direction</span><span>02</span></div>
-        <div class="lc-img"><img src="images/logo/logo-concept-02.jpg" alt="Logo direction 02" /></div>
-        <div class="lc-bot"><span class="num">02 ·</span><span>Bold display · arcade-era</span></div>
-      </div>
-      <div class="logo-card">
-        <div class="lc-top"><span>Logo Direction</span><span>03</span></div>
-        <div class="lc-img"><img src="images/logo/logo-concept-03.jpg" alt="Logo direction 03" /></div>
-        <div class="lc-bot"><span class="num">03 ·</span><span>Stamped · workwear · graphic</span></div>
-      </div>
+    <div class="hero-bottom">
+      <span class="tag">01 — Concept Brief</span>
+      <span class="tag">Rough · Edinburgh</span>
+      <span class="tag">rough.ink</span>
     </div>
-    <aside class="vibes">
-      <div class="vibes-head"><span>Vibe References</span><span class="pip">A — D</span></div>
-      <div class="vibe-grid">
-        <div class="vibe"><img src="images/logo/RefA_Beast.jpg" alt="" /><span class="v-cap">A · Beast</span></div>
-        <div class="vibe"><img src="images/logo/RefB_Airstrip.jpg" alt="" /><span class="v-cap">B · Airstrip</span></div>
-        <div class="vibe"><img src="images/logo/RefC_Renzo.jpg" alt="" /><span class="v-cap">C · Renzo</span></div>
-        <div class="vibe"><img src="images/logo/RefD_Club.jpg" alt="" /><span class="v-cap">D · Club</span></div>
-      </div>
-    </aside>
-  </section>
+  </div>
+</section>
 
-  <!-- DESIGN MOVES -->
-  <section class="moves">
-    <div class="moves-label">
-      <div class="ml-tag">Section 04</div>
-      <div class="ml-title">Design<br/>Moves</div>
-      <div class="ml-sub">Bang-for-buck. Investment where the customer feels it.</div>
+<!-- Concept Statement -->
+<section class="dark">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02 — Concept</span>
+      <h2 class="section-title">The Elevated<br>Dive Bar</h2>
     </div>
-    <div class="move">
-      <div class="m-img"><img src="images/mood/Brutto%20Sign%20Night.jpg" alt="" /></div>
-      <div class="m-body">
-        <div class="m-num">Move 01</div>
-        <div class="m-h">Neon Anchor</div>
-        <div class="m-d">A single hand-bent sign sets the room. Reads from the street, photographs at the booth.</div>
-      </div>
-    </div>
-    <div class="move">
-      <div class="m-img"><img src="images/mood/Urban%20Lounge%20Interior.jpg" alt="" /></div>
-      <div class="m-body">
-        <div class="m-num">Move 02</div>
-        <div class="m-h">Warm-Dim Zoning</div>
-        <div class="m-d">Three lighting layers — pendant, wall-wash, candle. Dimmed deliberately, not weakly.</div>
-      </div>
-    </div>
-    <div class="move">
-      <div class="m-img"><img src="images/mood/fc5e6a5b785996155a481a0ee554567f.jpg" alt="" /></div>
-      <div class="m-body">
-        <div class="m-num">Move 03</div>
-        <div class="m-h">Botanical Layer</div>
-        <div class="m-d">Dense planting against deep teal walls. Softens noise and reads lived-in by week one.</div>
-      </div>
-    </div>
-    <div class="move">
-      <div class="m-img"><img src="images/mood/Retro%20Diner%20Renzo.jpg" alt="" /></div>
-      <div class="m-body">
-        <div class="m-num">Move 04</div>
-        <div class="m-h">Pinball Corner</div>
-        <div class="m-d">Two cabinets, a vinyl shelf, one good speaker. Earns the back wall and pulls dwell time.</div>
-      </div>
-    </div>
-    <div class="move">
-      <div class="m-img"><img src="images/mood/Heart%20Alligators%20Folk%20Art.jpg" alt="" /></div>
-      <div class="m-body">
-        <div class="m-num">Move 05</div>
-        <div class="m-h">Curated Wall</div>
-        <div class="m-d">Salvaged folk art and signwritten panels. Tells a story without reading like a theme bar.</div>
-      </div>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="f-cell"><span class="pip"></span>Rough · Edinburgh · rough.ink</div>
-    <div class="f-cell"><span class="lime-pill">Floorplan — driftwood-floorplan.pdf</span></div>
-    <div class="f-cell">Project 5049 · Concept Direction · v1.0</div>
-    <div class="f-cell right">Prepared for Star Pubs &amp; Bars</div>
-  </footer>
+    <div class="concept-grid">
+      <div class="concept-body">
+        <p>Not a dive bar. Not a cocktail bar. The space in between. Somewhere you can lean on the bar in a good coat or a worn-in jacket and feel equally at home. Pinball in the back. Neon over the bar. Greenery softening every hard edge.</p>
+        <p>The room earns its keep through atmosphere, not fit-out spend — every design decision concentrated where the customer feels it.</p>
+      </div>
 
-</div>
+      <div class="concept-image">
+        <img src="images/mood/0e92412ac99d32ed36268a1b7e0ca4a9.jpg" alt="Atmospheric dark bar interior reference" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Aesthetic Direction -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">03 — Aesthetic</span>
+      <h2 class="section-title">Maximalist<br>Botanical<br>and Retro Gaming</h2>
+    </div>
+
+    <div class="aesthetic-formula">
+      Maximalist Botanical <span class="x">×</span> Retro Gaming
+    </div>
+
+    <p style="margin-bottom: clamp(2rem, 4vw, 3rem); max-width: 70ch; font-size: clamp(1rem, 0.4vw + 0.9rem, 1.125rem);">Two worlds, one room. Layered greenery — real where light allows, considered faux where it doesn&rsquo;t — meets the warmth of analogue games. Pinball cabinets as anchor objects, sourced second-hand and restored. Neon as both light source and graphic statement. The density of a collected space, the restraint of a designed one.</p>
+
+    <div class="aesthetic-grid">
+      <figure class="aesthetic-tile">
+        <img src="images/mood/Brutto Sign Night.jpg" alt="Hand-bent neon signage at night" />
+        <figcaption class="tag tile-cap">Neon — Hand-Bent</figcaption>
+      </figure>
+      <figure class="aesthetic-tile">
+        <img src="images/mood/fc5e6a5b785996155a481a0ee554567f.jpg" alt="Dense botanical layering reference" />
+        <figcaption class="tag tile-cap">Botanical — Layered</figcaption>
+      </figure>
+      <figure class="aesthetic-tile">
+        <img src="images/mood/Urban Lounge Interior.jpg" alt="Lounge interior with worn leather and warm light" />
+        <figcaption class="tag tile-cap">Lounge — Lived-In</figcaption>
+      </figure>
+      <figure class="aesthetic-tile">
+        <img src="images/mood/b2ab4a7ead6ce7f4c5b23f9f944e0ce1 (1).jpg" alt="Neon detail close-up" />
+        <figcaption class="tag tile-cap">Neon — Detail</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Palette -->
+<section class="dark">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">04 — Palette</span>
+      <h2 class="section-title">Deep · Desaturated<br>Forgiving</h2>
+    </div>
+
+    <div class="palette-row">
+      <div class="palette-body">
+        <p>A palette that does two jobs at once: builds mood and hides budget. Deep teals and forest greens on walls absorb light and make the room feel smaller in the right way. Off-blacks on joinery. Chocolate as the warm bridge tone. A single neon accent — tangerine-led — cuts through the dark.</p>
+      </div>
+
+      <div class="swatches">
+        <div class="swatch">
+          <div class="chip" style="background:#1F3A3D;"></div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Deep Teal</span>
+            <span class="swatch-hex">#1F3A3D</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#2C3A2A;"></div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Forest</span>
+            <span class="swatch-hex">#2C3A2A</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#272727;"></div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Near Black</span>
+            <span class="swatch-hex">#272727</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background:#6D422E;"></div>
+          <div class="swatch-meta">
+            <span class="swatch-name">Chocolate</span>
+            <span class="swatch-hex">#6D422E</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Design Moves -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">05 — Design Moves</span>
+      <h2 class="section-title">Six Moves<br>That Make the Room</h2>
+    </div>
+
+    <div class="moves-grid">
+      <article class="move">
+        <span class="move-num">01</span>
+        <div>
+          <h3 class="move-head">Neon Anchor</h3>
+          <p class="move-body">A single hand-bent neon piece behind the bar. Reads from the street, photographs at every table. One sign does the work of three downlights.</p>
+        </div>
+      </article>
+
+      <article class="move">
+        <span class="move-num">02</span>
+        <div>
+          <h3 class="move-head">Warm-Dim Zoning</h3>
+          <p class="move-body">Three lighting circuits on independent dimming: entrance, bar, back room. The room should change shape across the evening without changing a single fitting.</p>
+        </div>
+      </article>
+
+      <article class="move">
+        <span class="move-num">03</span>
+        <div>
+          <h3 class="move-head">Botanical Layering</h3>
+          <p class="move-body">Dense planting at sightline-breakers — bar back, booth ends, threshold. Softens noise, hides dated surfaces, reads lived-in by week one. Specified for low-light tolerance.</p>
+        </div>
+      </article>
+
+      <article class="move">
+        <span class="move-num">04</span>
+        <div>
+          <h3 class="move-head">Vintage Pendant Cluster</h3>
+          <p class="move-body">Mismatched pendants over the bar pass. Coordinated by warmth and brass tones, sourced at auction over retail. No two the same, all reading as one family.</p>
+        </div>
+      </article>
+
+      <article class="move">
+        <span class="move-num">05</span>
+        <div>
+          <h3 class="move-head">Pinball Corner</h3>
+          <p class="move-body">One restored pinball machine and a cocktail-table arcade cabinet. Generates dwell time and return visits without touching the drinks list. Second-hand, not showroom.</p>
+        </div>
+      </article>
+
+      <article class="move">
+        <span class="move-num">06</span>
+        <div>
+          <h3 class="move-head">Joinery, Restrained</h3>
+          <p class="move-body">Existing bar retained where sound. Top re-clad, fascia restained, brass detailing added. New joinery confined to back-bar shelving and one banquette run. No structural moves unless they unlock revenue.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Reference -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">06 — Reference</span>
+      <h2 class="section-title">The Lioness<br>of Leith</h2>
+    </div>
+
+    <div class="reference-grid">
+      <figure class="reference-image">
+        <img src="images/mood/Retro Diner Renzo.jpg" alt="Reference interior — atmospheric layered bar in the spirit of The Lioness of Leith" />
+      </figure>
+
+      <div>
+        <div class="reference-quote">A bar that knows what it is and does not need to explain.</div>
+        <p style="font-size: clamp(1rem, 0.4vw + 0.9rem, 1.125rem); line-height: 1.55;">The single most accurate read on the elevated dive-bar mood. Object density without visual weight. Atmosphere through lighting, sound, and curation rather than fit-out. The benchmark we are aiming for in feel, not in detail.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Logo Directions -->
+<section class="dark">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">07 — Identity</span>
+      <h2 class="section-title">Three Logo<br>Directions</h2>
+    </div>
+
+    <p style="color: rgba(237, 239, 233, 0.85); margin-bottom: clamp(2rem, 4vw, 3rem); max-width: 70ch; font-size: clamp(1rem, 0.4vw + 0.9rem, 1.125rem);">Concepts, not final marks. Three distinct routes to test against the room. Each one written to live equally well above a doorway, on a beermat, and stitched on a worn-in apron.</p>
+
+    <div class="logo-grid">
+      <article class="logo-card">
+        <div class="logo-image"><img src="images/logo/logo-concept-01.jpg" alt="Logo concept 01 — hand-drawn maritime folk style" /></div>
+        <div class="logo-meta">
+          <div class="logo-num">Direction 01</div>
+          <div class="logo-name">Hand-drawn<br>Maritime Folk</div>
+        </div>
+      </article>
+
+      <article class="logo-card">
+        <div class="logo-image"><img src="images/logo/logo-concept-02.jpg" alt="Logo concept 02 — bold arcade-era display type" /></div>
+        <div class="logo-meta">
+          <div class="logo-num">Direction 02</div>
+          <div class="logo-name">Bold Arcade<br>Display Type</div>
+        </div>
+      </article>
+
+      <article class="logo-card">
+        <div class="logo-image"><img src="images/logo/logo-concept-03.jpg" alt="Logo concept 03 — stamped workwear graphic" /></div>
+        <div class="logo-meta">
+          <div class="logo-num">Direction 03</div>
+          <div class="logo-name">Stamped<br>Workwear Graphic</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Vibe References -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">08 — Vibe</span>
+      <h2 class="section-title">Reference<br>Stack</h2>
+    </div>
+
+    <p style="margin-bottom: clamp(2rem, 4vw, 3rem); max-width: 70ch; font-size: clamp(1rem, 0.4vw + 0.9rem, 1.125rem);">Four further reads we keep coming back to. Pulled for tone of voice and graphic confidence, not for direct copying. Together they map the territory Driftwood lives in.</p>
+
+    <div class="vibe-grid">
+      <article class="vibe-card">
+        <div class="vibe-image"><img src="images/logo/RefA_Beast.jpg" alt="Vibe reference A — Beast" /></div>
+        <div class="vibe-meta">
+          <span class="vibe-letter">A</span>
+          <span class="vibe-name">Beast</span>
+        </div>
+      </article>
+
+      <article class="vibe-card">
+        <div class="vibe-image"><img src="images/logo/RefB_Airstrip.jpg" alt="Vibe reference B — Airstrip" /></div>
+        <div class="vibe-meta">
+          <span class="vibe-letter">B</span>
+          <span class="vibe-name">Airstrip</span>
+        </div>
+      </article>
+
+      <article class="vibe-card">
+        <div class="vibe-image"><img src="images/logo/RefC_Renzo.jpg" alt="Vibe reference C — Renzo" /></div>
+        <div class="vibe-meta">
+          <span class="vibe-letter">C</span>
+          <span class="vibe-name">Renzo</span>
+        </div>
+      </article>
+
+      <article class="vibe-card">
+        <div class="vibe-image"><img src="images/logo/RefD_Club.jpg" alt="Vibe reference D — Club" /></div>
+        <div class="vibe-meta">
+          <span class="vibe-letter">D</span>
+          <span class="vibe-name">Club</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-display" style="margin-bottom: 2.5rem;">
+      Driftwood <span class="accent">·</span> Glasgow
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-block">
+        <span class="label">Studio</span>
+        <strong>Rough</strong><br>
+        Edinburgh<br>
+        <a href="https://rough.ink">rough.ink</a>
+      </div>
+
+      <div class="footer-block">
+        <span class="label">Project</span>
+        <strong>5049</strong><br>
+        Concept Direction<br>
+        v1.0 — May 2026
+      </div>
+
+      <div class="footer-block">
+        <span class="label">Prepared for</span>
+        <strong>Star Pubs &amp; Bars</strong>
+      </div>
+
+      <div class="footer-block">
+        <span class="label">Appendix</span>
+        Floorplan available<br>
+        <a href="images/driftwood-floorplan.pdf">driftwood floorplan.PDF</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="tag">End of Document</span>
+      <span class="tag">Rough · Edinburgh · rough.ink</span>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
