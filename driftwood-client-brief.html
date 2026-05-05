@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<title>Driftwood — Concept Brief | Rough</title>
+<style>
+@font-face {
+  font-family: 'FoundersGroteskXCond';
+  src: url('fonts/FoundersGroteskXCond-Bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Sohne';
+  src: url('fonts/Sohne-Kraftig.ttf') format('truetype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'SohneBreit';
+  src: url('fonts/SohneBreit-Kraftig.ttf') format('truetype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+:root {
+  --near-black: #272727;
+  --off-white: #EDEFE9;
+  --chocolate: #6D422E;
+  --tangerine: #FC8143;
+  --acid-lime: #ECFEA7;
+
+  --font-display: 'FoundersGroteskXCond', 'Impact', 'Helvetica Neue Condensed', sans-serif;
+  --font-body: 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+  --font-tag: 'SohneBreit', 'Sohne', 'Helvetica Neue', Arial, sans-serif;
+
+  --rule: 1px solid var(--near-black);
+  --rule-light: 1px solid rgba(39, 39, 39, 0.18);
+}
+
+@page { size: A3 landscape; margin: 0; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 420mm;
+  height: 297mm;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--near-black);
+  background: var(--off-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  overflow: hidden;
+}
+
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.page {
+  width: 420mm;
+  height: 297mm;
+  display: grid;
+  grid-template-rows: 12mm 75mm 95mm 55mm 45mm 15mm;
+  background: var(--off-white);
+}
+
+/* ---- HEADER ---- */
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  padding: 0 8mm;
+  border-bottom: var(--rule);
+  background: var(--near-black);
+  color: var(--off-white);
+}
+.header .logo {
+  font-family: var(--font-display);
+  font-size: 18pt;
+  line-height: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+.header .meta-mid {
+  font-family: var(--font-tag);
+  font-size: 8pt;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--off-white);
+}
+.header .meta-mid .dot { color: var(--tangerine); margin: 0 6px; }
+.header .meta-end {
+  font-family: var(--font-tag);
+  font-size: 8pt;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--off-white);
+}
+
+/* ---- HERO ---- */
+.hero {
+  display: grid;
+  grid-template-columns: 250mm 170mm;
+  border-bottom: var(--rule);
+}
+.hero-text {
+  padding: 8mm 8mm 6mm;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  border-right: var(--rule);
+  background: var(--off-white);
+}
+.hero-tag {
+  font-family: var(--font-tag);
+  font-size: 8pt;
+  text-transform: uppercase;
+  color: var(--chocolate);
+  margin-bottom: 4mm;
+}
+.hero-tag .lime {
+  background: var(--acid-lime);
+  padding: 2px 6px;
+  margin-left: 6px;
+  color: var(--near-black);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 168pt;
+  line-height: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: var(--near-black);
+}
+.hero-sub {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26pt;
+  line-height: 0.85;
+  text-transform: uppercase;
+  margin-top: 5mm;
+  color: var(--chocolate);
+}
+.hero-positioning {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8mm;
+  padding-top: 6mm;
+  border-top: var(--rule-light);
+  margin-top: 4mm;
+}
+.hero-positioning p {
+  font-size: 9.5pt;
+  line-height: 1.5;
+  max-width: 52ch;
+}
+.hero-image { position: relative; overflow: hidden; }
+.hero-image .stamp {
+  position: absolute;
+  top: 6mm;
+  left: 6mm;
+  background: var(--tangerine);
+  color: var(--near-black);
+  font-family: var(--font-tag);
+  font-size: 8pt;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  z-index: 2;
+}
+
+/* ---- MOOD ---- */
+.mood {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 1fr;
+  border-bottom: var(--rule);
+}
+.mood .cell { position: relative; overflow: hidden; border-right: var(--rule); border-bottom: var(--rule); }
+.mood .cell:nth-child(4n) { border-right: 0; }
+.mood .cell:nth-child(n+5) { border-bottom: 0; }
+.mood .cell .cap {
+  position: absolute;
+  bottom: 4mm; left: 4mm;
+  font-family: var(--font-tag);
+  font-size: 7pt;
+  text-transform: uppercase;
+  color: var(--off-white);
+  background: rgba(39,39,39,0.78);
+  padding: 3px 6px;
+}
+.mood-banner {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  z-index: 5;
+  background: var(--near-black);
+  color: var(--off-white);
+  font-family: var(--font-tag);
+  font-size: 8pt;
+  text-transform: uppercase;
+  padding: 3px 8px;
+}
+
+/* ---- LOGOS BAND ---- */
+.logos {
+  display: grid;
+  grid-template-columns: 280mm 140mm;
+  border-bottom: var(--rule);
+}
+.logos-main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-right: var(--rule);
+}
+.logo-card {
+  display: grid;
+  grid-template-rows: 8mm 1fr 8mm;
+  border-right: var(--rule-light);
+  background: var(--near-black);
+}
+.logo-card:last-child { border-right: 0; }
+.logo-card .lc-top, .logo-card .lc-bot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5mm;
+  font-family: var(--font-tag);
+  font-size: 8pt;
+  text-transform: uppercase;
+  color: var(--off-white);
+  background: var(--near-black);
+}
+.logo-card .lc-bot { color: var(--off-white); border-top: 1px solid rgba(237,239,233,0.15); }
+.logo-card .lc-bot .num { color: var(--tangerine); }
+.logo-card .lc-img { background: var(--near-black); position: relative; overflow: hidden; }
+.logo-card .lc-img img { object-fit: contain; padding: 5mm; }
+
+.vibes {
+  display: grid;
+  grid-template-rows: 8mm 1fr;
+  background: var(--off-white);
+}
+.vibes-head {
+  display: flex;
+  align-items: center;
+  padding: 0 5mm;
+  font-family: var(--font-tag);
+  font-size: 8pt;
+  text-transform: uppercase;
+  border-bottom: var(--rule-light);
+  justify-content: space-between;
+}
+.vibes-head .pip { color: var(--chocolate); }
+.vibe-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.vibe { position: relative; overflow: hidden; border-right: var(--rule-light); border-bottom: var(--rule-light); }
+.vibe:nth-child(2n) { border-right: 0; }
+.vibe:nth-child(n+3) { border-bottom: 0; }
+.vibe .v-cap {
+  position: absolute;
+  bottom: 3mm; left: 3mm;
+  font-family: var(--font-tag);
+  font-size: 7pt;
+  text-transform: uppercase;
+  color: var(--off-white);
+  background: rgba(39,39,39,0.82);
+  padding: 2px 5px;
+}
+
+/* ---- DESIGN MOVES ---- */
+.moves {
+  display: grid;
+  grid-template-columns: 70mm repeat(5, 1fr);
+  border-bottom: var(--rule);
+}
+.moves-label {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 5mm;
+  border-right: var(--rule);
+  background: var(--near-black);
+  color: var(--off-white);
+}
+.moves-label .ml-tag {
+  font-family: var(--font-tag);
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  color: var(--tangerine);
+}
+.moves-label .ml-title {
+  font-family: var(--font-display);
+  font-size: 32pt;
+  line-height: 0.78;
+  text-transform: uppercase;
+  margin-top: 2mm;
+}
+.moves-label .ml-sub {
+  font-family: var(--font-tag);
+  font-size: 7pt;
+  text-transform: uppercase;
+  color: var(--off-white);
+  opacity: 0.6;
+  margin-top: 2mm;
+}
+.move {
+  display: grid;
+  grid-template-rows: 18mm 1fr;
+  border-right: var(--rule-light);
+}
+.move:last-child { border-right: 0; }
+.move .m-img { overflow: hidden; border-bottom: var(--rule-light); }
+.move .m-body { padding: 3mm 4mm; display: grid; grid-template-rows: auto auto 1fr; }
+.move .m-num {
+  font-family: var(--font-tag);
+  font-size: 7pt;
+  color: var(--tangerine);
+  text-transform: uppercase;
+}
+.move .m-h {
+  font-family: var(--font-display);
+  font-size: 16pt;
+  line-height: 0.85;
+  text-transform: uppercase;
+  margin-top: 1mm;
+  color: var(--near-black);
+}
+.move .m-d {
+  font-size: 7.5pt;
+  line-height: 1.4;
+  margin-top: 2mm;
+  color: var(--near-black);
+}
+
+/* ---- FOOTER ---- */
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 0 8mm;
+  font-family: var(--font-tag);
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  color: var(--near-black);
+  background: var(--off-white);
+  border-top: var(--rule);
+}
+.footer .f-cell { display: flex; align-items: center; gap: 6px; }
+.footer .f-cell .pip {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--tangerine);
+}
+.footer .f-cell.right { justify-content: flex-end; }
+.footer .lime-pill {
+  background: var(--acid-lime);
+  padding: 3px 8px;
+  color: var(--near-black);
+}
+
+/* ---- UTILITIES ---- */
+.kicker {
+  font-family: var(--font-tag);
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  color: var(--chocolate);
+  margin-bottom: 2mm;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">Rough</div>
+    <div class="meta-mid">5049 <span class="dot">·</span> Driftwood, Glasgow <span class="dot">·</span> Concept Brief</div>
+    <div class="meta-end">For Star Pubs &amp; Bars · Heineken Leased Estate</div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-tag">Concept Direction <span class="lime">v1.0 · May 2026</span></div>
+      <div>
+        <h1 class="hero-title">Driftwood</h1>
+        <div class="hero-sub">Elevated Dive Bar — Glasgow</div>
+      </div>
+      <div class="hero-positioning">
+        <p>Driftwood reads as found, not styled. A late-night room that feels like it has always been there — moody, lived-in, and quietly confident. Layered botanicals, vintage pendants and warm-dim LED zoning carry the eye from the door to the back wall, where pinball and neon do the heavy lifting.</p>
+        <p>The pitch is tight: a maximalist, retro-gaming bar that earns its keep without renovating the bones. Investment is concentrated where the customer feels it — lighting, signage, surface texture — so every pound spent shows up at the table.</p>
+      </div>
+    </div>
+    <div class="hero-image">
+      <span class="stamp">Reference · Lioness of Leith</span>
+      <img src="images/mood/Dante%27s%20Hifi%20Bar.jpg" alt="Hero mood — retro hifi bar" />
+    </div>
+  </section>
+
+  <!-- MOOD -->
+  <section class="mood">
+    <div class="mood-banner">Mood — Atmosphere, Material, Light</div>
+    <div class="cell"><img src="images/mood/Brutto%20Sign%20Night.jpg" alt="" /><span class="cap">Neon Signage</span></div>
+    <div class="cell"><img src="images/mood/Urban%20Lounge%20Interior.jpg" alt="" /><span class="cap">Moody Lounge</span></div>
+    <div class="cell"><img src="images/mood/fc5e6a5b785996155a481a0ee554567f.jpg" alt="" /><span class="cap">Botanical Layering</span></div>
+    <div class="cell"><img src="images/mood/Motel%20Pop%20Art.jpg" alt="" /><span class="cap">Pop Art Punctuation</span></div>
+    <div class="cell"><img src="images/mood/Retro%20Diner%20Renzo.jpg" alt="" /><span class="cap">Retro Vinyl &amp; Chrome</span></div>
+    <div class="cell"><img src="images/mood/0e92412ac99d32ed36268a1b7e0ca4a9.jpg" alt="" /><span class="cap">Dark Atmospheric</span></div>
+    <div class="cell"><img src="images/mood/b2ab4a7ead6ce7f4c5b23f9f944e0ce1%20%281%29.jpg" alt="" /><span class="cap">Neon Detail</span></div>
+    <div class="cell"><img src="images/mood/Heart%20Alligators%20Folk%20Art.jpg" alt="" /><span class="cap">Folk Art Detail</span></div>
+  </section>
+
+  <!-- LOGOS -->
+  <section class="logos">
+    <div class="logos-main">
+      <div class="logo-card">
+        <div class="lc-top"><span>Logo Direction</span><span>01</span></div>
+        <div class="lc-img"><img src="images/logo/logo-concept-01.jpg" alt="Logo direction 01" /></div>
+        <div class="lc-bot"><span class="num">01 ·</span><span>Hand-drawn · maritime · folk</span></div>
+      </div>
+      <div class="logo-card">
+        <div class="lc-top"><span>Logo Direction</span><span>02</span></div>
+        <div class="lc-img"><img src="images/logo/logo-concept-02.jpg" alt="Logo direction 02" /></div>
+        <div class="lc-bot"><span class="num">02 ·</span><span>Bold display · arcade-era</span></div>
+      </div>
+      <div class="logo-card">
+        <div class="lc-top"><span>Logo Direction</span><span>03</span></div>
+        <div class="lc-img"><img src="images/logo/logo-concept-03.jpg" alt="Logo direction 03" /></div>
+        <div class="lc-bot"><span class="num">03 ·</span><span>Stamped · workwear · graphic</span></div>
+      </div>
+    </div>
+    <aside class="vibes">
+      <div class="vibes-head"><span>Vibe References</span><span class="pip">A — D</span></div>
+      <div class="vibe-grid">
+        <div class="vibe"><img src="images/logo/RefA_Beast.jpg" alt="" /><span class="v-cap">A · Beast</span></div>
+        <div class="vibe"><img src="images/logo/RefB_Airstrip.jpg" alt="" /><span class="v-cap">B · Airstrip</span></div>
+        <div class="vibe"><img src="images/logo/RefC_Renzo.jpg" alt="" /><span class="v-cap">C · Renzo</span></div>
+        <div class="vibe"><img src="images/logo/RefD_Club.jpg" alt="" /><span class="v-cap">D · Club</span></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- DESIGN MOVES -->
+  <section class="moves">
+    <div class="moves-label">
+      <div class="ml-tag">Section 04</div>
+      <div class="ml-title">Design<br/>Moves</div>
+      <div class="ml-sub">Bang-for-buck. Investment where the customer feels it.</div>
+    </div>
+    <div class="move">
+      <div class="m-img"><img src="images/mood/Brutto%20Sign%20Night.jpg" alt="" /></div>
+      <div class="m-body">
+        <div class="m-num">Move 01</div>
+        <div class="m-h">Neon Anchor</div>
+        <div class="m-d">A single hand-bent sign sets the room. Reads from the street, photographs at the booth.</div>
+      </div>
+    </div>
+    <div class="move">
+      <div class="m-img"><img src="images/mood/Urban%20Lounge%20Interior.jpg" alt="" /></div>
+      <div class="m-body">
+        <div class="m-num">Move 02</div>
+        <div class="m-h">Warm-Dim Zoning</div>
+        <div class="m-d">Three lighting layers — pendant, wall-wash, candle. Dimmed deliberately, not weakly.</div>
+      </div>
+    </div>
+    <div class="move">
+      <div class="m-img"><img src="images/mood/fc5e6a5b785996155a481a0ee554567f.jpg" alt="" /></div>
+      <div class="m-body">
+        <div class="m-num">Move 03</div>
+        <div class="m-h">Botanical Layer</div>
+        <div class="m-d">Dense planting against deep teal walls. Softens noise and reads lived-in by week one.</div>
+      </div>
+    </div>
+    <div class="move">
+      <div class="m-img"><img src="images/mood/Retro%20Diner%20Renzo.jpg" alt="" /></div>
+      <div class="m-body">
+        <div class="m-num">Move 04</div>
+        <div class="m-h">Pinball Corner</div>
+        <div class="m-d">Two cabinets, a vinyl shelf, one good speaker. Earns the back wall and pulls dwell time.</div>
+      </div>
+    </div>
+    <div class="move">
+      <div class="m-img"><img src="images/mood/Heart%20Alligators%20Folk%20Art.jpg" alt="" /></div>
+      <div class="m-body">
+        <div class="m-num">Move 05</div>
+        <div class="m-h">Curated Wall</div>
+        <div class="m-d">Salvaged folk art and signwritten panels. Tells a story without reading like a theme bar.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="f-cell"><span class="pip"></span>Rough · Edinburgh · rough.ink</div>
+    <div class="f-cell"><span class="lime-pill">Floorplan — driftwood-floorplan.pdf</span></div>
+    <div class="f-cell">Project 5049 · Concept Direction · v1.0</div>
+    <div class="f-cell right">Prepared for Star Pubs &amp; Bars</div>
+  </footer>
+
+</div>
+</body>
+</html>
